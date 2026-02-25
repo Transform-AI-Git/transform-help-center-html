@@ -374,7 +374,7 @@ footer {
     <div class="pill" onclick="filterLevel('account')"><div class="pill-dot" style="background:#8B8FA8"></div>Account</div>
     <div class="pill" onclick="filterLevel('org')"><div class="pill-dot" style="background:#555C70"></div>Organization</div>
     <div class="pill" onclick="filterLevel('project')"><div class="pill-dot" style="background:var(--purple)"></div>Project</div>
-    <div class="pill" onclick="filterLevel('work')"><div class="pill-dot" style="background:var(--work)"></div>Work Items</div>
+    <div class="pill" onclick="filterLevel('work')"><div class="pill-dot" style="background:var(--work)"></div>Tasks & Requirements</div>
     <div class="pill" onclick="filterLevel('delivery')"><div class="pill-dot" style="background:var(--delivery)"></div>Delivery</div>
     <div class="pill" onclick="filterLevel('ai')"><div class="pill-dot" style="background:var(--ai)"></div>AI & Meetings</div>
     <div class="pill" onclick="filterLevel('analytics')"><div class="pill-dot" style="background:var(--analytics)"></div>Analytics</div>
@@ -556,7 +556,7 @@ footer {
   <div class="layer layer-work" data-level="work">
     <div class="layer-title">
       <div class="layer-title-dot" style="background:var(--work)"></div>
-      <span class="lt-work">Work Items</span>
+      <span class="lt-work">Tasks & Requirements</span>
       <span class="layer-title-desc">— The day-to-day building blocks of your project. Everything you track and manage.</span>
     </div>
     <div class="cards-row">
@@ -830,19 +830,19 @@ const nodeData = {
     connects:['Meetings','Artifacts','Requirements','Tasks','Test Cases']
   },
   requirements: {
-    icon:'📝', name:'Requirements', level:'Work Items',
+    icon:'📝', name:'Requirements', level:'Tasks & Requirements',
     desc:'Requirements capture what the customer needs the system to do. They are the central object in Transform — everything connects back to them. Link requirements to processes, systems, tasks, test cases, build items, and solutions.',
     whatFor:['Document what the customer has asked for in a structured way','Track the status of each requirement through the project lifecycle','Link requirements to the tasks and test cases that fulfill them','Filter requirements by process area, system, status, or priority'],
     connects:['Tasks','Test Cases','Build Items','Solutions','Processes','Systems','Sections','Artifacts']
   },
   tasks: {
-    icon:'✔️', name:'Tasks', level:'Work Items',
+    icon:'✔️', name:'Tasks', level:'Tasks & Requirements',
     desc:'Tasks are the actual work to be done. They sit inside project sections, appear on your Gantt chart, and can be assigned to teammates with due dates. Tasks can have sub-tasks and dependency relationships with other tasks.',
     whatFor:['Track day-to-day work across the project team','Build a Gantt chart with realistic timelines and dependencies','Assign work to specific team members with due dates','Break complex work into subtasks for better tracking'],
     connects:['Dependencies','Sections','Requirements','Teammates','Gantt']
   },
   dependencies: {
-    icon:'🔗', name:'Dependencies', level:'Work Items',
+    icon:'🔗', name:'Dependencies', level:'Tasks & Requirements',
     desc:'Dependencies define the order tasks must happen in. Use the Phrase Builder in the Gantt view to set dependencies using plain language. Supports four dependency types with optional lag days between tasks.',
     whatFor:['Ensure the right sequence of work across the project','Automatically adjust task dates when predecessors shift','Identify the critical path through your project','Model realistic timelines that account for hand-offs and wait times'],
     connects:['Tasks','Gantt Chart']
