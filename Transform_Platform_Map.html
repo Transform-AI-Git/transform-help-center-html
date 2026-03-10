@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Transform AI — Platform Map</title>
+<title>Transform AI: Platform Map</title>
 <style>
 @import url('https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&display=swap');
@@ -369,7 +369,7 @@ footer {
 <div class="hero">
   
       <h1>Everything in Transform, <span>clearly connected.</span></h1>
-  <p>A plain-language guide to how the Transform platform is structured — from the account all the way down to test cases.</p>
+  <p>A plain-language guide to how the Transform platform is structured, from the account all the way down to test cases.</p>
   <div class="level-pills">
     <div class="pill" onclick="filterLevel('account')"><div class="pill-dot" style="background:#8B8FA8"></div>Account</div>
     <div class="pill" onclick="filterLevel('org')"><div class="pill-dot" style="background:#555C70"></div>Organization</div>
@@ -384,14 +384,14 @@ footer {
 
 <!-- MAIN DIAGRAM -->
 <div class="diagram-section">
-  <div class="section-label">Platform Structure — Top to Bottom</div>
+  <div class="section-label">Platform Structure: Top to Bottom</div>
 
   <!-- ACCOUNT -->
   <div class="layer layer-account" data-level="account">
     <div class="layer-title">
       <div class="layer-title-dot" style="background:var(--account)"></div>
       <span class="lt-account">Account</span>
-      <span class="layer-title-desc">— The company's root in Transform. Everything lives under here.</span>
+      <span class="layer-title-desc">The company's root in Transform. Everything lives under here.</span>
     </div>
     <div class="cards-row">
       <div class="node node-account" onclick="showDetail('account')">
@@ -403,7 +403,7 @@ footer {
       <div class="node node-account" onclick="showDetail('teammates')">
         <span class="node-icon">👤</span>
         <div class="node-name">Teammates</div>
-        <div class="node-desc">Everyone with access to Transform — internal team members and any external collaborators.</div>
+        <div class="node-desc">Everyone with access to Transform, including internal team members and any external collaborators.</div>
         <span class="node-tag">Users & Roles</span>
       </div>
       <div class="node node-account" onclick="showDetail('roles')">
@@ -437,7 +437,7 @@ footer {
     <div class="layer-title">
       <div class="layer-title-dot" style="background:var(--org)"></div>
       <span class="lt-org">Organization</span>
-      <span class="layer-title-desc">— Typically represents a client or a distinct business unit. One account can have many orgs.</span>
+      <span class="layer-title-desc">Typically represents a client or a distinct business unit. One account can have many orgs.</span>
     </div>
     <div class="cards-row">
       <div class="node node-org" onclick="showDetail('org')">
@@ -449,7 +449,7 @@ footer {
       <div class="node node-org" onclick="showDetail('processes')">
         <span class="node-icon">🔄</span>
         <div class="node-name">Processes</div>
-        <div class="node-desc">Standard operating procedures and methodology — such as Record to Report or Order to Cash. Shared across all projects in the org.</div>
+        <div class="node-desc">Standard operating procedures and methodology, such as Record to Report or Order to Cash. Shared across all projects in the org.</div>
         <span class="node-tag">Methodology</span>
       </div>
       <div class="node node-org" onclick="showDetail('systems')">
@@ -461,13 +461,13 @@ footer {
       <div class="node node-org" onclick="showDetail('segmenttypes')">
         <span class="node-icon">🗂️</span>
         <div class="node-name">Segment Types</div>
-        <div class="node-desc">The classification schema for the organization's business dimensions — such as Department, Subsidiary, or Location. Define types once, then create Segments within each.</div>
+        <div class="node-desc">The classification schema for the organization's business dimensions, such as Department, Subsidiary, or Location. Define types once, then create Segments within each.</div>
         <span class="node-tag">Classification schema</span>
       </div>
       <div class="node node-org" onclick="showDetail('segments')">
         <span class="node-icon">📌</span>
         <div class="node-name">Segments</div>
-        <div class="node-desc">The organization's core business dimensions — such as legal entity, department, or line of business — used to structure how work is organized and reported.</div>
+        <div class="node-desc">The organization's core business dimensions, such as legal entity, department, or line of business. Used to structure how work is organized and reported.</div>
         <span class="node-tag">Business Structure</span>
       </div>
     </div>
@@ -483,19 +483,19 @@ footer {
     <div class="layer-title">
       <div class="layer-title-dot" style="background:var(--proj)"></div>
       <span class="lt-proj">Project</span>
-      <span class="layer-title-desc">— The core unit of work. Everything below lives inside a project.</span>
+      <span class="layer-title-desc">The core unit of work. Everything below lives inside a project.</span>
     </div>
     <div class="cards-row">
       <div class="node node-proj" onclick="showDetail('project')">
         <span class="node-icon">📁</span>
         <div class="node-name">Project</div>
-        <div class="node-desc">A specific engagement, phase, or workstream — such as an ERP Implementation or Evaluation. Projects hold all tasks, requirements, and deliverables.</div>
+        <div class="node-desc">A specific engagement, phase, or workstream, such as an ERP Implementation or Evaluation. Projects hold all tasks, requirements, and deliverables.</div>
         <span class="node-tag">Core container</span>
       </div>
       <div class="node node-proj" onclick="showDetail('sections')">
         <span class="node-icon">📑</span>
         <div class="node-name">Project Sections</div>
-        <div class="node-desc">Break the project into phases or workstreams — such as Plan, Design, Build, Verify, Deploy. Sections can nest inside each other and appear in the Gantt chart.</div>
+        <div class="node-desc">Break the project into phases or workstreams, such as Plan, Design, Build, Verify, or Deploy. Sections can nest inside each other and appear in the Gantt chart.</div>
         <span class="node-tag">Structure</span>
       </div>
       <div class="node node-proj" onclick="showDetail('raci')">
@@ -524,7 +524,7 @@ footer {
     <div class="layer-title">
       <div class="layer-title-dot" style="background:var(--ai)"></div>
       <span class="lt-ai">AI & Meetings</span>
-      <span class="layer-title-desc">— Optional source for auto-extracting requirements, tasks, and test cases.</span>
+      <span class="layer-title-desc">Optional source for auto-extracting requirements, tasks, and test cases.</span>
     </div>
     <div class="cards-row">
       <div class="node node-ai" onclick="showDetail('meetings')">
@@ -536,13 +536,13 @@ footer {
       <div class="node node-ai" onclick="showDetail('artifacts')">
         <span class="node-icon">📎</span>
         <div class="node-name">Artifacts</div>
-        <div class="node-desc">Any document attached to the project — such as discovery questionnaires, BRDs, process flows, or SOWs. Connect to a document platform for living documents that stay in sync.</div>
+        <div class="node-desc">Any document attached to the project, such as discovery questionnaires, BRDs, process flows, or SOWs. Connect to a document platform for living documents that stay in sync.</div>
         <span class="node-tag">Documents</span>
       </div>
       <div class="node node-ai" onclick="showDetail('ingest')">
         <span class="node-icon">🤖</span>
         <div class="node-name">AI Ingest</div>
-        <div class="node-desc">Run Ingest on any meeting or artifact and the AI scans every word to pull out requirements, tasks, test cases, and action items — ready to approve or edit.</div>
+        <div class="node-desc">Run Ingest on any meeting or artifact and the AI scans every word to pull out requirements, tasks, test cases, and action items. Review and approve before they are created.</div>
         <span class="node-tag">AI extraction</span>
       </div>
     </div>
@@ -558,7 +558,7 @@ footer {
     <div class="layer-title">
       <div class="layer-title-dot" style="background:var(--work)"></div>
       <span class="lt-work">Tasks & Requirements</span>
-      <span class="layer-title-desc">— The day-to-day building blocks of the project.</span>
+      <span class="layer-title-desc">The day-to-day building blocks of the project.</span>
     </div>
     <div class="cards-row">
       <div class="node node-work" onclick="showDetail('requirements')">
@@ -576,7 +576,7 @@ footer {
       <div class="node node-work" onclick="showDetail('dependencies')">
         <span class="node-icon">🔗</span>
         <div class="node-name">Dependencies</div>
-        <div class="node-desc">Define the order that tasks must happen in. Supports four types: Finish-to-Start, Start-to-Start, Finish-to-Finish, and Start-to-Finish — with optional lag days between tasks.</div>
+        <div class="node-desc">Define the order that tasks must happen in. Supports four types: Finish-to-Start, Start-to-Start, Finish-to-Finish, and Start-to-Finish. Optional lag days can be set between tasks.</div>
         <span class="node-tag">Sequencing</span>
       </div>
     </div>
@@ -592,19 +592,19 @@ footer {
     <div class="layer-title">
       <div class="layer-title-dot" style="background:var(--delivery)"></div>
       <span class="lt-delivery">Delivery</span>
-      <span class="layer-title-desc">— The technical and quality layer. Track what's being built and verify it works.</span>
+      <span class="layer-title-desc">The technical and quality layer. Track what's being built and verify it works.</span>
     </div>
     <div class="cards-row">
       <div class="node node-delivery" onclick="showDetail('solutions')">
         <span class="node-icon">💡</span>
         <div class="node-name">Solutions</div>
-        <div class="node-desc">A complete piece of functionality being delivered — such as a system integration or a custom approval workflow. Solutions group together all the Build Items needed to make them work.</div>
+        <div class="node-desc">A complete piece of functionality being delivered, such as a system integration or a custom approval workflow. Solutions group together all the Build Items needed to make them work.</div>
         <span class="node-tag">Functional scope</span>
       </div>
       <div class="node node-delivery" onclick="showDetail('builditems')">
         <span class="node-icon">🔧</span>
         <div class="node-name">Build Items</div>
-        <div class="node-desc">The individual technical components inside a solution — scripts, workflows, saved searches, custom fields, integrations. Track progress and % complete on each one.</div>
+        <div class="node-desc">The individual technical components inside a solution, such as scripts, workflows, saved searches, custom fields, or integrations. Track progress and % complete on each one.</div>
         <span class="node-tag">Technical components</span>
       </div>
       <div class="node node-delivery" onclick="showDetail('testcases')">
@@ -632,7 +632,7 @@ footer {
     <div class="layer-title">
       <div class="layer-title-dot" style="background:var(--analytics)"></div>
       <span class="lt-analytics">Analytics & Visibility</span>
-      <span class="layer-title-desc">— See everything, share the right view with the right people.</span>
+      <span class="layer-title-desc">See everything, share the right view with the right people.</span>
     </div>
     <div class="cards-row">
       <div class="node node-analytics" onclick="showDetail('dashboards')">
@@ -644,13 +644,13 @@ footer {
       <div class="node node-analytics" onclick="showDetail('savedviews')">
         <span class="node-icon">🔍</span>
         <div class="node-name">Saved Views</div>
-        <div class="node-desc">Save and share filtered lists of any object type — tasks by owner, open requirements by process area, test cases by system. Publish to a role for team-wide access.</div>
+        <div class="node-desc">Save and share filtered lists of any object type, such as tasks by owner, open requirements by process area, or test cases by system. Publish to a role for team-wide access.</div>
         <span class="node-tag">Filtered lists</span>
       </div>
       <div class="node node-analytics" onclick="showDetail('pivottables')">
         <span class="node-icon">📋</span>
         <div class="node-name">Pivot Tables</div>
-        <div class="node-desc">Slice and dice project data across multiple dimensions — requirements by status and process area, tasks by assignee and section, and more.</div>
+        <div class="node-desc">Slice and dice project data across multiple dimensions: requirements by status and process area, tasks by assignee and section, and more.</div>
         <span class="node-tag">Data analysis</span>
       </div>
     </div>
@@ -685,7 +685,7 @@ footer {
         <div class="rel-icon">💡→🔧</div>
         <div class="rel-text">
           <strong>Solutions → Build Items</strong>
-          A solution is the "what" — a Build Item is the "how". One solution can have many build items, each tracking a specific technical component.
+          A solution defines the functional outcome. A Build Item is the individual technical component. One solution can have many build items, each tracking a specific technical component.
         </div>
       </div>
       <div class="rel-item">
@@ -699,7 +699,7 @@ footer {
         <div class="rel-icon">🔄→📝🔧</div>
         <div class="rel-text">
           <strong>Processes → Requirements & Build Items</strong>
-          Link requirements and build items back to the process area they belong to — Record to Report, Order to Cash, etc. — for easy filtering and reporting.
+          Link requirements and build items back to the process area they belong to, such as Record to Report or Order to Cash, for easy filtering and reporting.
         </div>
       </div>
       <div class="rel-item">
@@ -770,14 +770,14 @@ const nodeData = {
   },
   teammates: {
     icon:'👤', name:'Teammates', level:'Account Level',
-    desc:'Everyone with access to Transform — internal consultants, project managers, and any client team members invited to collaborate.',
+    desc:'Everyone with access to Transform, including internal consultants, project managers, and any client team members invited to collaborate.',
     whatFor:['Assign tasks and requirements to specific people','Control who can see which projects and data','Track who requested requirements or owns deliverables','Enable client collaboration on specific projects'],
     connects:['Roles','Projects','Tasks','Calendar Sync']
   },
   roles: {
     icon:'🔑', name:'Roles', level:'Account Level',
     desc:'Roles define what a teammate can see and do. Assign roles to teammates and then publish dashboards, saved views, and pivot tables to a role so the right people automatically see the right information.',
-    whatFor:['Control data access across projects and orgs','Publish tailored dashboards for PM, Consultant, and Executive roles','Ensure clients only see what\'s relevant to them','Streamline onboarding — new team members get the right setup instantly'],
+    whatFor:['Control data access across projects and orgs','Publish tailored dashboards for PM, Consultant, and Executive roles','Ensure clients only see what\'s relevant to them','Streamline onboarding: new team members get the right setup instantly'],
     connects:['Teammates','Dashboards','Saved Views','Pivot Tables']
   },
   connectors: {
@@ -794,19 +794,19 @@ const nodeData = {
   },
   org: {
     icon:'🏢', name:'Organization', level:'Org Level',
-    desc:'An Organization typically represents a single client, a business unit, or a distinct work area. One account can have many organizations — each with their own projects, processes, and team members.',
+    desc:'An Organization typically represents a single client, a business unit, or a distinct work area. One account can have many organizations. Each has its own projects, processes, and team members.',
     whatFor:['Separate client data for security and permissions','Maintain shared processes and systems across all client projects','Create org-level RACI and RAID that apply to all work in the org','Give clients access to only their own environment'],
     connects:['Projects','Processes','Systems','Segments','RACI Matrix','RAID Log']
   },
   processes: {
     icon:'🔄', name:'Processes', level:'Org Level',
-    desc:'Processes represent the standard methodology for an engagement — such as Record to Report, Order to Cash, Procure to Pay, or Inventory Management.',
+    desc:'Processes represent the standard methodology for an engagement, such as Record to Report, Order to Cash, Procure to Pay, or Inventory Management.',
     whatFor:['Document the implementation methodology in one place','Link requirements, build items, and test cases to their process area','Filter and report on work by process area at any time','Onboard teammates with clear process documentation'],
     connects:['Requirements','Build Items','Solutions','Test Cases','RACI Items']
   },
   systems: {
     icon:'⚙️', name:'Systems', level:'Org Level',
-    desc:'The software platforms involved in an engagement — such as ERP systems, CRMs, or other enterprise tools. Define systems once at the org level and reference them throughout projects.',
+    desc:'The software platforms involved in an engagement, such as ERP systems, CRMs, or other enterprise tools. Define systems once at the org level and reference them throughout projects.',
     whatFor:['Tag requirements and build items with the system they relate to','Group test cases by system for UAT planning','Track integration points between systems','Quickly see all open items for a given platform'],
     connects:['Requirements','Build Items','Test Cases','RACI Items']
   },
@@ -818,7 +818,7 @@ const nodeData = {
   },
   segments: {
     icon:'📌', name:'Segments', level:'Org Level',
-    desc:'The organization\'s core business dimensions — such as legal entity, department, or line of business. Segments are used to structure how work is organized and reported across the organization.',
+    desc:'The organization\'s core business dimensions, such as legal entity, department, or line of business. Segments are used to structure how work is organized and reported across the organization.',
     whatFor:['Associate processes with the organizational unit that owns them','Align systems to the legal entity or department that operates them','Define RACI accountability within a specific organizational dimension','Scope and filter requirements by business unit or line of business'],
     connects:['Segment Types','Processes','Systems','RACI Items','Requirements']
   },
@@ -830,7 +830,7 @@ const nodeData = {
   },
   sections: {
     icon:'📑', name:'Project Sections', level:'Project Level',
-    desc:'Sections break the project into logical phases or workstreams — such as Plan, Design, Build, Verify, or Deploy. Sections appear in the Gantt chart and can nest inside each other to create sub-phases.',
+    desc:'Sections break the project into logical phases or workstreams, such as Plan, Design, Build, Verify, or Deploy. Sections appear in the Gantt chart and can nest inside each other to create sub-phases.',
     whatFor:['Organize tasks and requirements by phase','Build the project plan with a clear phase structure','Create the backbone of the Gantt chart','Group work by process area or functional workstream'],
     connects:['Tasks','Requirements','Test Cases','Gantt Chart']
   },
@@ -855,12 +855,12 @@ const nodeData = {
   meetings: {
     icon:'🎙️', name:'Meetings', level:'Project Level',
     desc:'Log every call, working session, and check-in. The AI notetaker bot joins the meeting on the configured platform, records it, and creates a full transcript and summary automatically.',
-    whatFor:['Never lose a conversation or decision again','Capture every requirement mentioned in a call automatically','Build a complete history of every client interaction','Stop taking notes during meetings — focus on the conversation'],
+    whatFor:['Never lose a conversation or decision again','Capture every requirement mentioned in a call automatically','Build a complete history of every client interaction','Stop taking notes during meetings. Focus on the conversation'],
     connects:['Meeting Bot','Artifacts','AI Ingest','Requirements','Tasks']
   },
   artifacts: {
     icon:'📎', name:'Artifacts', level:'Project Level',
-    desc:'Any document associated with the project — such as discovery questionnaires, BRDs, process flows, or SOWs. Connect to a document platform for living documents that update automatically.',
+    desc:'Any document associated with the project, such as discovery questionnaires, BRDs, process flows, or SOWs. Connect to a document platform for living documents that update automatically.',
     whatFor:['Keep all project documents in one place inside the project context','Connect a document platform so changes sync automatically','Upload PDFs and static documents as read-only records','Run AI Ingest on any document to extract requirements automatically'],
     connects:['Document Platform','AI Ingest','Meetings','Requirements','Artifact Templates']
   },
@@ -872,7 +872,7 @@ const nodeData = {
   },
   requirements: {
     icon:'📝', name:'Requirements', level:'Tasks & Requirements',
-    desc:'Requirements capture what the customer needs the system to do. They are the central object in Transform — everything connects back to them. Link requirements to processes, systems, tasks, test cases, build items, and solutions.',
+    desc:'Requirements capture what the customer needs the system to do. They are the central object in Transform. Everything connects back to them. Link requirements to processes, systems, tasks, test cases, build items, and solutions.',
     whatFor:['Document what the customer has asked for in a structured way','Track the status of each requirement through the project lifecycle','Link requirements to the tasks and test cases that fulfill them','Filter requirements by process area, system, status, or priority'],
     connects:['Tasks','Test Cases','Build Items','Solutions','Processes','Systems','Sections','Artifacts']
   },
@@ -890,13 +890,13 @@ const nodeData = {
   },
   solutions: {
     icon:'💡', name:'Solutions', level:'Delivery',
-    desc:'A Solution represents a complete piece of functionality being delivered — such as a system integration, a custom approval workflow, or a saved search. Solutions group together all the Build Items needed to make them work.',
+    desc:'A Solution represents a complete piece of functionality being delivered, such as a system integration, a custom approval workflow, or a saved search. Solutions group together all the Build Items needed to make them work.',
     whatFor:['Organize technical delivery at the functional level','Track overall progress on a solution as build items complete','Link solutions back to the requirements they fulfill','Give developers a clear scope of what they are building'],
     connects:['Build Items','Requirements','Processes','Systems','Projects']
   },
   builditems: {
     icon:'🔧', name:'Build Items', level:'Delivery',
-    desc:'Build Items are the individual technical components inside a solution — scripts, workflows, saved searches, custom fields, integrations, reports. Track progress and completion percentage on each one independently.',
+    desc:'Build Items are the individual technical components inside a solution, such as scripts, workflows, saved searches, custom fields, integrations, or reports. Track progress and completion percentage on each one independently.',
     whatFor:['Track progress on every technical component being built','Assign individual build items to specific developers or consultants','Link to test cases to verify each component works','Track completion percentage for each item independently'],
     connects:['Solutions','Test Cases','Requirements','Processes','Systems']
   },
@@ -908,13 +908,13 @@ const nodeData = {
   },
   dashboards: {
     icon:'📊', name:'Dashboards', level:'Analytics',
-    desc:'Build custom dashboards with the metrics and views that matter most to each role. Publish dashboards to roles so every PM, consultant, and executive sees exactly what they need — without building it multiple times.',
+    desc:'Build custom dashboards with the metrics and views that matter most to each role. Publish dashboards to roles so every PM, consultant, and executive sees exactly what they need, without building it multiple times.',
     whatFor:['Give project managers a health view of tasks, risks, and issues','Give consultants a focused view of their own work and assignments','Give executive sponsors a high-level portfolio overview','Publish role-based dashboards that roll out to every client project automatically'],
     connects:['Roles','Saved Views','Pivot Tables','Projects']
   },
   savedviews: {
     icon:'🔍', name:'Saved Views', level:'Analytics',
-    desc:'Save any filtered list of objects — tasks by owner, open requirements by process area, build items by system — and share with the team or publish to a role for team-wide access.',
+    desc:'Save any filtered list of objects, such as tasks by owner, open requirements by process area, build items by system. Share with the team or publish to a role for team-wide access.',
     whatFor:['Save frequently used filters to avoid rebuilding them','Share a specific view with a client or teammate','Publish views to roles for consistent team-wide access','Set up reminders tied to a saved view'],
     connects:['Roles','Reminders','Dashboards']
   },
