@@ -458,6 +458,12 @@ footer {
         <div class="node-desc">The software platforms involved — NetSuite, Shopify, Salesforce, etc. Link systems to requirements and test cases.</div>
         <span class="node-tag">Tech landscape</span>
       </div>
+      <div class="node node-org" onclick="showDetail('segmenttypes')">
+        <span class="node-icon">🗂️</span>
+        <div class="node-name">Segment Types</div>
+        <div class="node-desc">The classification schema for the organization's business dimensions — such as Department, Subsidiary, or Location. Define types once, then create Segments within each.</div>
+        <span class="node-tag">Classification schema</span>
+      </div>
       <div class="node node-org" onclick="showDetail('segments')">
         <span class="node-icon">📌</span>
         <div class="node-name">Segments</div>
@@ -504,18 +510,13 @@ footer {
         <div class="node-desc">Track your Risks, Assumptions, Issues, and Dependencies in one place. Visible at the org or project level depending on your setup.</div>
         <span class="node-tag">Risk management</span>
       </div>
-      <div class="node node-proj" onclick="showDetail('deployment')">
-        <span class="node-icon">🚀</span>
-        <div class="node-name">Deployment Plan</div>
-        <div class="node-desc">Plan and track your go-live activities, cutover steps, and post-deployment support within the project context.</div>
-        <span class="node-tag">Go-live</span>
-      </div>
+
     </div>
   </div>
 
   <!-- DOWN ARROW -->
   <div class="connector-row">
-    <div class="arrow-down">↓<span>generates</span></div>
+    <div class="arrow-down">↓<span>work items created directly or via AI Ingest</span></div>
   </div>
 
   <!-- AI & MEETINGS -->
@@ -523,7 +524,7 @@ footer {
     <div class="layer-title">
       <div class="layer-title-dot" style="background:var(--ai)"></div>
       <span class="lt-ai">AI & Meetings</span>
-      <span class="layer-title-desc">— Record, capture, and automatically extract insights from every conversation.</span>
+      <span class="layer-title-desc">— Optional source for auto-extracting requirements, tasks, and test cases.</span>
     </div>
     <div class="cards-row">
       <div class="node node-ai" onclick="showDetail('meetings')">
@@ -549,7 +550,7 @@ footer {
 
   <!-- DOWN ARROW -->
   <div class="connector-row">
-    <div class="arrow-down">↓<span>becomes</span></div>
+    <div class="arrow-down">↓<span>tracked and managed as</span></div>
   </div>
 
   <!-- WORK ITEMS -->
@@ -612,6 +613,12 @@ footer {
         <div class="node-desc">Verify that requirements and build items work as expected. Link test cases to specific systems and track Pass, Fail, or Not Yet Tested during UAT.</div>
         <span class="node-tag">Quality assurance</span>
       </div>
+      <div class="node node-delivery" onclick="showDetail('deployment')">
+        <span class="node-icon">🚀</span>
+        <div class="node-name">Deployment Plan</div>
+        <div class="node-desc">Plan and track go-live activities, cutover steps, and post-deployment support within the project context.</div>
+        <span class="node-tag">Go-live</span>
+      </div>
     </div>
   </div>
 
@@ -668,6 +675,13 @@ footer {
         </div>
       </div>
       <div class="rel-item">
+        <div class="rel-icon">📝→💡</div>
+        <div class="rel-text">
+          <strong>Requirements → Solutions</strong>
+          Link requirements to the solution that fulfills them. This gives you full traceability from what was asked for to what was built.
+        </div>
+      </div>
+      <div class="rel-item">
         <div class="rel-icon">💡→🔧</div>
         <div class="rel-text">
           <strong>Solutions → Build Items</strong>
@@ -696,10 +710,10 @@ footer {
         </div>
       </div>
       <div class="rel-item">
-        <div class="rel-icon">📎→📝</div>
+        <div class="rel-icon">📎→📝🧪</div>
         <div class="rel-text">
-          <strong>Artifacts → Requirements</strong>
-          Upload a BRD or discovery doc as an artifact, run Ingest, and Transform will extract requirements from the document automatically.
+          <strong>Artifacts → Requirements & Test Cases</strong>
+          Upload a BRD or discovery doc as an artifact, run Ingest, and Transform will automatically extract requirements and test cases from the document.
         </div>
       </div>
       <div class="rel-item">
@@ -707,6 +721,27 @@ footer {
         <div class="rel-text">
           <strong>Roles → Dashboards & Views</strong>
           Publish dashboards and saved views to specific roles. Your PM sees project health, your consultants see their task list, your executive sees the portfolio overview.
+        </div>
+      </div>
+      <div class="rel-item">
+        <div class="rel-icon">📌→✅</div>
+        <div class="rel-text">
+          <strong>Segments → RACI Items</strong>
+          RACI items can be scoped to a specific Segment, allowing you to define accountability within a particular business dimension such as a department or subsidiary.
+        </div>
+      </div>
+      <div class="rel-item">
+        <div class="rel-icon">🗂️→📌</div>
+        <div class="rel-text">
+          <strong>Segment Types → Segments</strong>
+          Segment Types define the classification schema (e.g. Department, Subsidiary). Segments are the individual instances within each type (e.g. "Human Resources" within Department).
+        </div>
+      </div>
+      <div class="rel-item">
+        <div class="rel-icon">📑→📝✔️🧪</div>
+        <div class="rel-text">
+          <strong>Project Sections → Requirements, Tasks & Test Cases</strong>
+          Requirements, Tasks, and Test Cases can all be assigned to a Project Section, giving you a structured phase-by-phase view of all work across object types.
         </div>
       </div>
     </div>
@@ -721,7 +756,7 @@ footer {
 </div>
 
 <footer>
-  Transform AI · Platform Map · February 2026 · For questions contact your Transform Customer Experience team
+  Transform AI · Platform Map · March 2026
 </footer>
 
 <script>
@@ -774,6 +809,12 @@ const nodeData = {
     desc:'The software platforms involved in your engagement — NetSuite, Shopify, Salesforce, legacy ERPs, or any third-party tool. Define systems once at the org level and reference them throughout your projects.',
     whatFor:['Tag requirements and build items with the system they relate to','Group test cases by system for UAT planning','Track integration points between systems','Quickly see all open items for a given platform'],
     connects:['Requirements','Build Items','Test Cases','RACI Items']
+  },
+  segmenttypes: {
+    icon:'🗂️', name:'Segment Types', level:'Org Level',
+    desc:'Segment Types define the classification schema for the organization\'s business dimensions. Examples include Department, Subsidiary, Location, Region, Country, and Line of Business. Define types once at the org level, then create Segments within each type.',
+    whatFor:['Establish the taxonomy for how the organization is structured','Ensure Segments are consistently categorized across the platform','Filter and report on work by business dimension type','Support multi-entity or multi-region organizations'],
+    connects:['Segments','Organization']
   },
   segments: {
     icon:'📌', name:'Segments', level:'Org Level',
