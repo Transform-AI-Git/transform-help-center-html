@@ -102,7 +102,7 @@ header {
 }
 .pill:hover { background:rgba(255,255,255,0.12); transform:translateY(-1px); }
 .pill.active { background:rgba(116,105,232,0.3); border-color:rgba(116,105,232,0.6); color:white; }
-.pill-dot { width:8px; height:8px; border-radius:50%; }
+.pill-dot { width:8px; height:8px; border-radius:50%; pointer-events:none; }
 
 /* ===== MAIN DIAGRAM AREA ===== */
 .diagram-section { padding: 40px 48px 60px; }
@@ -371,14 +371,14 @@ footer {
       <h1>Everything in Transform, <span>clearly connected.</span></h1>
   <p>A plain-language guide to how the Transform platform is structured, from the account all the way down to test cases.</p>
   <div class="level-pills">
-    <div class="pill" onclick="filterLevel('account')"><div class="pill-dot" style="background:#8B8FA8"></div>Account</div>
-    <div class="pill" onclick="filterLevel('org')"><div class="pill-dot" style="background:#555C70"></div>Organization</div>
-    <div class="pill" onclick="filterLevel('project')"><div class="pill-dot" style="background:var(--purple)"></div>Project</div>
-    <div class="pill" onclick="filterLevel('work')"><div class="pill-dot" style="background:var(--work)"></div>Tasks & Requirements</div>
-    <div class="pill" onclick="filterLevel('delivery')"><div class="pill-dot" style="background:var(--delivery)"></div>Delivery</div>
-    <div class="pill" onclick="filterLevel('ai')"><div class="pill-dot" style="background:var(--ai)"></div>AI & Meetings</div>
-    <div class="pill" onclick="filterLevel('analytics')"><div class="pill-dot" style="background:var(--analytics)"></div>Analytics</div>
-    <div class="pill active" onclick="filterLevel('all')">Show All</div>
+    <div class="pill" data-filter="account"><div class="pill-dot" style="background:#8B8FA8"></div>Account</div>
+    <div class="pill" data-filter="org"><div class="pill-dot" style="background:#555C70"></div>Organization</div>
+    <div class="pill" data-filter="project"><div class="pill-dot" style="background:var(--purple)"></div>Project</div>
+    <div class="pill" data-filter="work"><div class="pill-dot" style="background:var(--work)"></div>Tasks & Requirements</div>
+    <div class="pill" data-filter="delivery"><div class="pill-dot" style="background:var(--delivery)"></div>Delivery</div>
+    <div class="pill" data-filter="ai"><div class="pill-dot" style="background:var(--ai)"></div>AI & Meetings</div>
+    <div class="pill" data-filter="analytics"><div class="pill-dot" style="background:var(--analytics)"></div>Analytics</div>
+    <div class="pill active" data-filter="all">Show All</div>
   </div>
 </div>
 
@@ -394,31 +394,31 @@ footer {
       <span class="layer-title-desc">The company's root in Transform. Everything lives under here.</span>
     </div>
     <div class="cards-row">
-      <div class="node node-account" onclick="showDetail('account')">
+      <div class="node node-account" data-key="account">
         <span class="node-icon">🏛️</span>
         <div class="node-name">Account</div>
         <div class="node-desc">The top-level workspace in Transform. Controls users, settings, integrations, and permissions across everything.</div>
         <span class="node-tag">Root level</span>
       </div>
-      <div class="node node-account" onclick="showDetail('teammates')">
+      <div class="node node-account" data-key="teammates">
         <span class="node-icon">👤</span>
         <div class="node-name">Teammates</div>
         <div class="node-desc">Everyone with access to Transform, including internal team members and any external collaborators.</div>
         <span class="node-tag">Users & Roles</span>
       </div>
-      <div class="node node-account" onclick="showDetail('roles')">
+      <div class="node node-account" data-key="roles">
         <span class="node-icon">🔑</span>
         <div class="node-name">Roles</div>
         <div class="node-desc">Define what each person can see and do. Roles control access to dashboards, views, and project data.</div>
         <span class="node-tag">Permissions</span>
       </div>
-      <div class="node node-account" onclick="showDetail('connectors')">
+      <div class="node node-account" data-key="connectors">
         <span class="node-icon">🔌</span>
         <div class="node-name">Connectors</div>
         <div class="node-desc">Integrations with external tools such as document storage, messaging, and calendar platforms. Set up once, used everywhere.</div>
         <span class="node-tag">Integrations</span>
       </div>
-      <div class="node node-account" onclick="showDetail('customfields')">
+      <div class="node node-account" data-key="customfields">
         <span class="node-icon">🏷️</span>
         <div class="node-name">Custom Fields</div>
         <div class="node-desc">Add fields to any object type across the platform to capture data specific to the business.</div>
@@ -440,31 +440,31 @@ footer {
       <span class="layer-title-desc">Typically represents a client or a distinct business unit. One account can have many orgs.</span>
     </div>
     <div class="cards-row">
-      <div class="node node-org" onclick="showDetail('org')">
+      <div class="node node-org" data-key="org">
         <span class="node-icon">🏢</span>
         <div class="node-name">Organization</div>
         <div class="node-desc">Represents a client, a company division, or a distinct work area. Each org holds its own projects, people, and shared resources.</div>
         <span class="node-tag">Client container</span>
       </div>
-      <div class="node node-org" onclick="showDetail('processes')">
+      <div class="node node-org" data-key="processes">
         <span class="node-icon">🔄</span>
         <div class="node-name">Processes</div>
         <div class="node-desc">Standard operating procedures and methodology, such as Record to Report or Order to Cash. Shared across all projects in the org.</div>
         <span class="node-tag">Methodology</span>
       </div>
-      <div class="node node-org" onclick="showDetail('systems')">
+      <div class="node node-org" data-key="systems">
         <span class="node-icon">⚙️</span>
         <div class="node-name">Systems</div>
         <div class="node-desc">The software platforms involved in the engagement. Link systems to requirements and test cases.</div>
         <span class="node-tag">Tech landscape</span>
       </div>
-      <div class="node node-org" onclick="showDetail('segmenttypes')">
+      <div class="node node-org" data-key="segmenttypes">
         <span class="node-icon">🗂️</span>
         <div class="node-name">Segment Types</div>
         <div class="node-desc">The classification schema for the organization's business dimensions, such as Department, Subsidiary, or Location. Define types once, then create Segments within each.</div>
         <span class="node-tag">Classification schema</span>
       </div>
-      <div class="node node-org" onclick="showDetail('segments')">
+      <div class="node node-org" data-key="segments">
         <span class="node-icon">📌</span>
         <div class="node-name">Segments</div>
         <div class="node-desc">The organization's core business dimensions, such as legal entity, department, or line of business. Used to structure how work is organized and reported.</div>
@@ -486,25 +486,25 @@ footer {
       <span class="layer-title-desc">The core unit of work. Everything below lives inside a project.</span>
     </div>
     <div class="cards-row">
-      <div class="node node-proj" onclick="showDetail('project')">
+      <div class="node node-proj" data-key="project">
         <span class="node-icon">📁</span>
         <div class="node-name">Project</div>
         <div class="node-desc">A specific engagement, phase, or workstream, such as an ERP Implementation or Evaluation. Projects hold all tasks, requirements, and deliverables.</div>
         <span class="node-tag">Core container</span>
       </div>
-      <div class="node node-proj" onclick="showDetail('sections')">
+      <div class="node node-proj" data-key="sections">
         <span class="node-icon">📑</span>
         <div class="node-name">Project Sections</div>
         <div class="node-desc">Break the project into phases or workstreams, such as Plan, Design, Build, Verify, or Deploy. Sections can nest inside each other and appear in the Gantt chart.</div>
         <span class="node-tag">Structure</span>
       </div>
-      <div class="node node-proj" onclick="showDetail('raci')">
+      <div class="node node-proj" data-key="raci">
         <span class="node-icon">✅</span>
         <div class="node-name">RACI Matrix</div>
         <div class="node-desc">Who is Responsible, Accountable, Consulted, and Informed for each activity. Can be set at the org or project level and published by role.</div>
         <span class="node-tag">Accountability</span>
       </div>
-      <div class="node node-proj" onclick="showDetail('raid')">
+      <div data-key="raid" class="node node-proj">
         <span class="node-icon">⚠️</span>
         <div class="node-name">RAID Log</div>
         <div class="node-desc">Track Risks, Assumptions, Issues, and Dependencies in one place. Visible at the org or project level depending on the configuration.</div>
@@ -527,19 +527,19 @@ footer {
       <span class="layer-title-desc">Optional source for auto-extracting requirements, tasks, and test cases.</span>
     </div>
     <div class="cards-row">
-      <div class="node node-ai" onclick="showDetail('meetings')">
+      <div class="node node-ai" data-key="meetings">
         <span class="node-icon">🎙️</span>
         <div class="node-name">Meetings</div>
         <div class="node-desc">Log every call, working session, or check-in. The AI notetaker bot joins the meeting, records it, and creates a full transcript and summary automatically.</div>
         <span class="node-tag">Auto-capture</span>
       </div>
-      <div class="node node-ai" onclick="showDetail('artifacts')">
+      <div class="node node-ai" data-key="artifacts">
         <span class="node-icon">📎</span>
         <div class="node-name">Artifacts</div>
         <div class="node-desc">Any document attached to the project, such as discovery questionnaires, BRDs, process flows, or SOWs. Connect to a document platform for living documents that stay in sync.</div>
         <span class="node-tag">Documents</span>
       </div>
-      <div class="node node-ai" onclick="showDetail('ingest')">
+      <div class="node node-ai" data-key="ingest">
         <span class="node-icon">🤖</span>
         <div class="node-name">AI Ingest</div>
         <div class="node-desc">Run Ingest on any meeting or artifact and the AI scans every word to pull out requirements, tasks, test cases, and action items. Review and approve before they are created.</div>
@@ -561,19 +561,19 @@ footer {
       <span class="layer-title-desc">The day-to-day building blocks of the project.</span>
     </div>
     <div class="cards-row">
-      <div class="node node-work" onclick="showDetail('requirements')">
+      <div class="node node-work" data-key="requirements">
         <span class="node-icon">📝</span>
         <div class="node-name">Requirements</div>
         <div class="node-desc">What the customer needs the system to do. Each requirement is linked to a process area, a system, and can have child tasks and test cases hanging off it.</div>
         <span class="node-tag">What's needed</span>
       </div>
-      <div class="node node-work" onclick="showDetail('tasks')">
+      <div class="node node-work" data-key="tasks">
         <span class="node-icon">✔️</span>
         <div class="node-name">Tasks</div>
         <div class="node-desc">The actual work to be done. Tasks live inside project sections, can be assigned to teammates, have due dates, and can be broken into subtasks. Shown on the Gantt chart.</div>
         <span class="node-tag">Work to do</span>
       </div>
-      <div class="node node-work" onclick="showDetail('dependencies')">
+      <div class="node node-work" data-key="dependencies">
         <span class="node-icon">🔗</span>
         <div class="node-name">Dependencies</div>
         <div class="node-desc">Define the order that tasks must happen in. Supports four types: Finish-to-Start, Start-to-Start, Finish-to-Finish, and Start-to-Finish. Optional lag days can be set between tasks.</div>
@@ -595,30 +595,25 @@ footer {
       <span class="layer-title-desc">The technical and quality layer. Track what's being built and verify it works.</span>
     </div>
     <div class="cards-row">
-      <div class="node node-delivery" onclick="showDetail('solutions')">
+      <div class="node node-delivery" data-key="solutions">
         <span class="node-icon">💡</span>
         <div class="node-name">Solutions</div>
         <div class="node-desc">A complete piece of functionality being delivered, such as a system integration or a custom approval workflow. Solutions group together all the Build Items needed to make them work.</div>
         <span class="node-tag">Functional scope</span>
       </div>
-      <div class="node node-delivery" onclick="showDetail('builditems')">
+      <div class="node node-delivery" data-key="builditems">
         <span class="node-icon">🔧</span>
         <div class="node-name">Build Items</div>
         <div class="node-desc">The individual technical components inside a solution, such as scripts, workflows, saved searches, custom fields, or integrations. Track progress and % complete on each one.</div>
         <span class="node-tag">Technical components</span>
       </div>
-      <div class="node node-delivery" onclick="showDetail('testcases')">
+      <div class="node node-delivery" data-key="testcases">
         <span class="node-icon">🧪</span>
         <div class="node-name">Test Cases</div>
         <div class="node-desc">Verify that requirements and build items work as expected. Link test cases to specific systems and track Pass, Fail, or Not Yet Tested during UAT.</div>
         <span class="node-tag">Quality assurance</span>
       </div>
-      <div class="node node-delivery" onclick="showDetail('deployment')">
-        <span class="node-icon">🚀</span>
-        <div class="node-name">Deployment Plan</div>
-        <div class="node-desc">Plan and track go-live activities, cutover steps, and post-deployment support within the project context.</div>
-        <span class="node-tag">Go-live</span>
-      </div>
+
     </div>
   </div>
 
@@ -635,19 +630,19 @@ footer {
       <span class="layer-title-desc">See everything, share the right view with the right people.</span>
     </div>
     <div class="cards-row">
-      <div class="node node-analytics" onclick="showDetail('dashboards')">
+      <div class="node node-analytics" data-key="dashboards">
         <span class="node-icon">📊</span>
         <div class="node-name">Dashboards</div>
         <div class="node-desc">Build custom views of project health, open items, and team progress. Publish dashboards by role so every PM, Consultant, or Executive sees what is relevant.</div>
         <span class="node-tag">Role-based views</span>
       </div>
-      <div class="node node-analytics" onclick="showDetail('savedviews')">
+      <div class="node node-analytics" data-key="savedviews">
         <span class="node-icon">🔍</span>
         <div class="node-name">Saved Views</div>
         <div class="node-desc">Save and share filtered lists of any object type, such as tasks by owner, open requirements by process area, or test cases by system. Publish to a role for team-wide access.</div>
         <span class="node-tag">Filtered lists</span>
       </div>
-      <div class="node node-analytics" onclick="showDetail('pivottables')">
+      <div class="node node-analytics" data-key="pivottables">
         <span class="node-icon">📋</span>
         <div class="node-name">Pivot Tables</div>
         <div class="node-desc">Slice and dice project data across multiple dimensions: requirements by status and process area, tasks by assignee and section, and more.</div>
@@ -751,7 +746,7 @@ footer {
 
 <!-- DETAIL PANEL -->
 <div class="detail-panel" id="detailPanel">
-  <div class="detail-close" onclick="closeDetail()">✕</div>
+  <div class="detail-close" id="detailClose">✕</div>
   <div id="detailContent"></div>
 </div>
 
@@ -846,12 +841,7 @@ const nodeData = {
     whatFor:['Track risks with probability, impact, and mitigation plans','Document assumptions made during scoping','Log active issues and their resolution status','Map dependencies between project workstreams'],
     connects:['Projects','Organizations']
   },
-  deployment: {
-    icon:'🚀', name:'Deployment Plan', level:'Project Level',
-    desc:'Plan and manage go-live activities within the project. Track cutover steps, parallel run periods, hypercare support, and post-deployment validation.',
-    whatFor:['Organize go-live cutover steps in sequence','Track parallel run and hypercare activities','Ensure nothing is missed before going live','Document the deployment approach for stakeholder approval'],
-    connects:['Projects','Tasks']
-  },
+
   meetings: {
     icon:'🎙️', name:'Meetings', level:'Project Level',
     desc:'Log every call, working session, and check-in. The AI notetaker bot joins the meeting on the configured platform, records it, and creates a full transcript and summary automatically.',
@@ -926,53 +916,62 @@ const nodeData = {
   }
 };
 
-function showDetail(key) {
-  const d = nodeData[key];
-  if (!d) return;
-  const panel = document.getElementById('detailPanel');
-  const content = document.getElementById('detailContent');
+document.querySelectorAll('.node[data-key]').forEach(function(node) {
+    node.addEventListener('click', function() {
+      var key = node.getAttribute('data-key');
+      var d = nodeData[key];
+      if (!d) return;
+      var panel = document.getElementById('detailPanel');
+      var contentEl = document.getElementById('detailContent');
 
-  const whatForItems = d.whatFor.map(w => `<div class="detail-item"><div class="detail-bullet"></div><span>${w}</span></div>`).join('');
-  const connItems = d.connects.map(c => `<span class="detail-conn">${c}</span>`).join('');
+      var whatForItems = d.whatFor.map(function(w) {
+        return '<div class="detail-item"><div class="detail-bullet"></div><span>' + w + '</span></div>';
+      }).join('');
+      var connItems = d.connects.map(function(c) {
+        return '<span class="detail-conn">' + c + '</span>';
+      }).join('');
 
-  content.innerHTML = `
-    <div class="detail-icon">${d.icon}</div>
-    <div class="detail-name">${d.name}</div>
-    <div class="detail-level">${d.level}</div>
-    <div class="detail-desc">${d.desc}</div>
-    <div class="detail-section-title">How it\'s used</div>
-    <div class="detail-items">${whatForItems}</div>
-    <div class="detail-section-title">Connects to</div>
-    <div class="detail-connections">${connItems}</div>
-  `;
+      contentEl.innerHTML =
+        '<div class="detail-icon">' + d.icon + '</div>' +
+        '<div class="detail-name">' + d.name + '</div>' +
+        '<div class="detail-level">' + d.level + '</div>' +
+        '<div class="detail-desc">' + d.desc + '</div>' +
+        '<div class="detail-section-title">How it\'s used</div>' +
+        '<div class="detail-items">' + whatForItems + '</div>' +
+        '<div class="detail-section-title">Connects to</div>' +
+        '<div class="detail-connections">' + connItems + '</div>';
 
-  panel.classList.add('open');
-
-  // Highlight clicked node
-  document.querySelectorAll('.node').forEach(n => n.classList.remove('highlighted'));
-  event.currentTarget && event.currentTarget.classList.add('highlighted');
-}
-
-function closeDetail() {
-  document.getElementById('detailPanel').classList.remove('open');
-  document.querySelectorAll('.node').forEach(n => n.classList.remove('highlighted'));
-}
-
-function filterLevel(level) {
-  document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
-  event.target.classList.add('active');
-
-  document.querySelectorAll('.layer').forEach(l => {
-    if (level === 'all') {
-      l.style.opacity = '1';
-      l.style.transform = 'scale(1)';
-    } else {
-      const match = l.dataset.level === level;
-      l.style.opacity = match ? '1' : '0.35';
-      l.style.transform = match ? 'scale(1.005)' : 'scale(1)';
-    }
+      panel.classList.add('open');
+      document.querySelectorAll('.node').forEach(function(n) { n.classList.remove('highlighted'); });
+      node.classList.add('highlighted');
+    });
   });
-}
+
+  var closeBtn = document.getElementById('detailClose');
+  if (closeBtn) {
+    closeBtn.addEventListener('click', function() {
+      document.getElementById('detailPanel').classList.remove('open');
+      document.querySelectorAll('.node').forEach(function(n) { n.classList.remove('highlighted'); });
+    });
+  }
+
+  document.querySelectorAll('.pill[data-filter]').forEach(function(pill) {
+    pill.addEventListener('click', function() {
+      var level = pill.getAttribute('data-filter');
+      document.querySelectorAll('.pill').forEach(function(p) { p.classList.remove('active'); });
+      pill.classList.add('active');
+      document.querySelectorAll('.layer').forEach(function(l) {
+        if (level === 'all') {
+          l.style.opacity = '1';
+          l.style.transform = 'scale(1)';
+        } else {
+          var match = l.getAttribute('data-level') === level;
+          l.style.opacity = match ? '1' : '0.35';
+          l.style.transform = match ? 'scale(1.005)' : 'scale(1)';
+        }
+      });
+    });
+  });
 </script>
 </body>
 </html>
