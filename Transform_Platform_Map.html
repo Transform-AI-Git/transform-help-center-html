@@ -340,8 +340,8 @@ footer {
 
 /* ===== ANIMATIONS ===== */
 @keyframes fadeUp {
-  from { opacity:0; transform:translateY(16px); }
-  to { opacity:1; transform:translateY(0); }
+  from { transform:translateY(16px); opacity:0.01; }
+  to { transform:translateY(0); opacity:1; }
 }
 .layer { animation: fadeUp 0.4s ease both; }
 .layer:nth-child(1) { animation-delay:0.05s; }
@@ -925,6 +925,7 @@ document.body.addEventListener('click', function(e) {
     document.querySelectorAll('.pill').forEach(function(p) { p.classList.remove('active'); });
     pill.classList.add('active');
     document.querySelectorAll('.layer').forEach(function(l) {
+      l.style.animation = 'none'; // cancel fill-mode lock so inline opacity works
       if (level === 'all') {
         l.style.opacity = '1';
         l.style.transform = 'scale(1)';
