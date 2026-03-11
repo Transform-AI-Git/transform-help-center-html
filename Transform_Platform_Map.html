@@ -916,62 +916,61 @@ const nodeData = {
   }
 };
 
-document.querySelectorAll('.node[data-key]').forEach(function(node) {
-    node.addEventListener('click', function() {
-      var key = node.getAttribute('data-key');
-      var d = nodeData[key];
-      if (!d) return;
-      var panel = document.getElementById('detailPanel');
-      var contentEl = document.getElementById('detailContent');
+document.body.addEventListener('click', function(e) {
 
-      var whatForItems = d.whatFor.map(function(w) {
-        return '<div class="detail-item"><div class="detail-bullet"></div><span>' + w + '</span></div>';
-      }).join('');
-      var connItems = d.connects.map(function(c) {
-        return '<span class="detail-conn">' + c + '</span>';
-      }).join('');
-
-      contentEl.innerHTML =
-        '<div class="detail-icon">' + d.icon + '</div>' +
-        '<div class="detail-name">' + d.name + '</div>' +
-        '<div class="detail-level">' + d.level + '</div>' +
-        '<div class="detail-desc">' + d.desc + '</div>' +
-        '<div class="detail-section-title">How it\'s used</div>' +
-        '<div class="detail-items">' + whatForItems + '</div>' +
-        '<div class="detail-section-title">Connects to</div>' +
-        '<div class="detail-connections">' + connItems + '</div>';
-
-      panel.classList.add('open');
-      document.querySelectorAll('.node').forEach(function(n) { n.classList.remove('highlighted'); });
-      node.classList.add('highlighted');
+  // Filter pills
+  var pill = e.target.closest('.pill[data-filter]');
+  if (pill) {
+    var level = pill.getAttribute('data-filter');
+    document.querySelectorAll('.pill').forEach(function(p) { p.classList.remove('active'); });
+    pill.classList.add('active');
+    document.querySelectorAll('.layer').forEach(function(l) {
+      if (level === 'all') {
+        l.style.opacity = '1';
+        l.style.transform = 'scale(1)';
+      } else {
+        var match = l.getAttribute('data-level') === level;
+        l.style.opacity = match ? '1' : '0.15';
+        l.style.transform = match ? 'scale(1.005)' : 'scale(1)';
+      }
     });
-  });
-
-  var closeBtn = document.getElementById('detailClose');
-  if (closeBtn) {
-    closeBtn.addEventListener('click', function() {
-      document.getElementById('detailPanel').classList.remove('open');
-      document.querySelectorAll('.node').forEach(function(n) { n.classList.remove('highlighted'); });
-    });
+    return;
   }
 
-  document.querySelectorAll('.pill[data-filter]').forEach(function(pill) {
-    pill.addEventListener('click', function() {
-      var level = pill.getAttribute('data-filter');
-      document.querySelectorAll('.pill').forEach(function(p) { p.classList.remove('active'); });
-      pill.classList.add('active');
-      document.querySelectorAll('.layer').forEach(function(l) {
-        if (level === 'all') {
-          l.style.opacity = '1';
-          l.style.transform = 'scale(1)';
-        } else {
-          var match = l.getAttribute('data-level') === level;
-          l.style.opacity = match ? '1' : '0.35';
-          l.style.transform = match ? 'scale(1.005)' : 'scale(1)';
-        }
-      });
-    });
-  });
+  // Close button
+  if (e.target.closest('#detailClose')) {
+    document.getElementById('detailPanel').classList.remove('open');
+    document.querySelectorAll('.node').forEach(function(n) { n.classList.remove('highlighted'); });
+    return;
+  }
+
+  // Node cards
+  var node = e.target.closest('.node[data-key]');
+  if (node) {
+    var key = node.getAttribute('data-key');
+    var d = nodeData[key];
+    if (!d) return;
+    var whatForItems = d.whatFor.map(function(w) {
+      return '<div class="detail-item"><div class="detail-bullet"></div><span>' + w + '</span></div>';
+    }).join('');
+    var connItems = d.connects.map(function(c) {
+      return '<span class="detail-conn">' + c + '</span>';
+    }).join('');
+    document.getElementById('detailContent').innerHTML =
+      '<div class="detail-icon">' + d.icon + '</div>' +
+      '<div class="detail-name">' + d.name + '</div>' +
+      '<div class="detail-level">' + d.level + '</div>' +
+      '<div class="detail-desc">' + d.desc + '</div>' +
+      '<div class="detail-section-title">How it\'s used</div>' +
+      '<div class="detail-items">' + whatForItems + '</div>' +
+      '<div class="detail-section-title">Connects to</div>' +
+      '<div class="detail-connections">' + connItems + '</div>';
+    document.getElementById('detailPanel').classList.add('open');
+    document.querySelectorAll('.node').forEach(function(n) { n.classList.remove('highlighted'); });
+    node.classList.add('highlighted');
+  }
+
+});
 </script>
 </body>
 </html>
