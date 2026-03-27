@@ -48,13 +48,15 @@
   .bdev{background:#E8F0FE;color:#1553A8;}
   .balec{background:#FFE8E5;color:#C0291A;}
   .bany{background:var(--ghost);color:var(--muted);}
-  .ber{background:#FFF3E0;color:#8B5000;border:1px solid #FFC857;}
+  .bnow{background:#EBF4EC;color:#2E6B36;border:1px solid #86B596;}
+  .cn{background:#EBF3FF;border-left:3px solid var(--blue);}  .cn .ct{color:#1553A8;}
   .callout{border-radius:10px;padding:16px 20px;margin:16px 0;font-size:13px;line-height:1.6;}
   .ct{font-weight:600;font-size:12px;letter-spacing:0.05em;text-transform:uppercase;margin-bottom:6px;}
   .cp{background:#F0EFFE;border-left:3px solid var(--purple);} .cp .ct{color:var(--purple);}
   .ca{background:#FFF8E7;border-left:3px solid var(--amber);} .ca .ct{color:#8B6800;}
   .cr{background:#FFF0EE;border-left:3px solid var(--red);}   .cr .ct{color:#C0291A;}
   .cs{background:#EDF5EF;border-left:3px solid var(--sage);}  .cs .ct{color:#2E6B36;}
+  .cn{background:#EBF3FF;border-left:3px solid var(--blue);}  .cn .ct{color:#1553A8;}
   .bpg{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0;}
   .bpc{background:var(--ghost);border-radius:10px;padding:18px 20px;font-size:13px;}
   .bpc h4{font-size:13px;font-weight:600;color:var(--onyx);margin-bottom:6px;display:flex;align-items:center;gap:8px;}
@@ -79,10 +81,16 @@
   .tl li{padding:9px 14px 9px 36px;position:relative;font-size:13px;border-bottom:1px solid var(--border);}
   .tl li:last-child{border-bottom:none;}
   .tl li::before{content:'↑';position:absolute;left:12px;color:var(--red);font-weight:700;}
-  .erl{list-style:none;margin:12px 0;}
-  .erl li{padding:10px 14px 10px 52px;position:relative;border-bottom:1px solid var(--border);font-size:13px;line-height:1.55;}
-  .erl li:last-child{border-bottom:none;}
-  .erl li::before{content:'ER';position:absolute;left:12px;top:11px;background:#FFF3E0;color:#8B5000;border:1px solid #FFC857;border-radius:4px;font-size:9px;font-weight:700;padding:1px 4px;letter-spacing:0.05em;}
+  .now-later{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:16px 0;}
+  .nl-box{border-radius:10px;padding:20px 22px;font-size:13px;}
+  .nl-box h4{font-size:13px;font-weight:600;margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+  .nl-now{background:#EDF5EF;border:1px solid #86B596;}
+  .nl-now h4{color:#2E6B36;}
+  .nl-later{background:#F3F4F9;border:1px solid #C8CAD6;}
+  .nl-later h4{color:#717585;}
+  .nl-box ul{list-style:none;}
+  .nl-box ul li{padding:6px 0;border-bottom:1px solid rgba(0,0,0,0.06);font-size:13px;}
+  .nl-box ul li:last-child{border-bottom:none;}
   .sc td:first-child{color:#C0291A;font-weight:600;}
   .sh td:first-child{color:#8B5000;font-weight:600;}
   .sm td:first-child{color:#7A5C00;font-weight:600;}
@@ -104,15 +112,17 @@
   <h2>Contents</h2>
   <ol>
     <li><a href="#s1">Fields You Have</a></li>
-    <li><a href="#s2">Missing Fields &amp; Default Values</a></li>
+    <li><a href="#s2">Fields to Add Now</a></li>
     <li><a href="#s3">Routing Logic</a></li>
-    <li><a href="#s4">SLA Best Practices</a></li>
+    <li><a href="#s4">SLA Working Targets</a></li>
     <li><a href="#s5">Awaiting Response — Rename Recommendation</a></li>
     <li><a href="#s6">Escalation Field Best Practices</a></li>
     <li><a href="#s7">Operational Best Practices</a></li>
     <li><a href="#s8">Triage vs. Resolution</a></li>
     <li><a href="#s9">Case Lifecycle Flowchart</a></li>
-    <li><a href="#s10">Enhancement Requests for Jose</a></li>
+    <li><a href="#s10">Confirmed Enhancement Requests</a></li>
+    <li><a href="#s11">Reporting &amp; Analytics</a></li>
+    <li><a href="#appendix">Appendix: Future State</a></li>
   </ol>
 </div>
 
@@ -127,7 +137,7 @@
     <tbody>
       <tr><td>Title</td><td>Text</td><td>Free text</td></tr>
       <tr><td>Description</td><td>Text area</td><td>Free text</td></tr>
-      <tr><td>Status</td><td>Dropdown</td><td>New · Triaged · In Progress · Waiting on Customer · Escalated · Resolved · Closed · <strong>Cancelled</strong> <em>(proposed — see Section 2)</em></td></tr>
+      <tr><td>Status</td><td>Dropdown</td><td>New · Triaged · In Progress · Waiting on Customer · Escalated · Resolved · Closed · Cancelled</td></tr>
       <tr><td>Type</td><td>Dropdown</td><td>Bug/Defect · Data Issue · Configuration/Setup · Access/Permissions · Integration Issue · Performance/Reliability · Feature Request/Enhancement · How To Guidance · Process/Operational Support · Incident/Service Disruption · Compliance/Audit/Security Concern · Other</td></tr>
       <tr><td>Priority</td><td>Dropdown</td><td>Not Set · Critical · High · Medium · Low</td></tr>
       <tr><td>Submitted By Name</td><td>Text</td><td>Free text — entered at submission</td></tr>
@@ -149,27 +159,60 @@
 <!-- S2 -->
 <div class="section" id="s2">
   <div class="slabel">Section 2</div>
-  <h2 class="st">Missing Fields &amp; Default Values</h2>
-  <p>The fields below are not currently in the form. Priority order is highest impact first. Fields marked <span class="badge ber">ER</span> also require a platform enhancement to fully automate and are logged in Section 10.</p>
+  <h2 class="st">Fields to Add Now</h2>
+  <p>These are the fields confirmed by Jose as the immediate additions — simple, manually managed, and achievable without platform automation. Everything else is deferred to Section 10.</p>
 
-  <div class="callout cr"><div class="ct">Most Critical Gap</div><strong>Account / Company</strong> is the single most important field to add. Without it, cases from BPC and PCG are indistinguishable — no client-level filtering, reporting, or pattern detection is possible.</div>
+  <div class="callout cn"><div class="ct">Jose's Principle</div>Keep it simple and iterate weekly. Build on real experience in the platform before adding complexity. The fields below are the agreed starting point.</div>
 
   <div class="tw"><table>
-    <thead><tr><th>Field</th><th>Type</th><th>Default Options / Format</th><th>Why It Matters</th></tr></thead>
+    <thead><tr><th>Field</th><th>Type</th><th>Values / Format</th><th>Notes</th></tr></thead>
     <tbody>
-      <tr><td>Account / Company</td><td>Dropdown</td><td>BPC · PCG · EPC · Clutch Mindset · SFE · CLTCG + Add new</td><td>Client attribution — cannot filter, report, or detect account-level patterns without this.</td></tr>
-      <tr><td>Client Primary Contact</td><td>Text</td><td>Free text — name of who to update on this case</td><td>Submitted By ≠ who to close the loop with. Multiple contacts exist per account.</td></tr>
-      <tr><td>Team / Queue</td><td>Dropdown</td><td>CX · Dev · Leadership</td><td>Primary routing field. Determines who owns the case, not just who submitted it.</td></tr>
-      <tr><td>Target Resolution Date</td><td>Date</td><td>Set manually at triage based on Priority SLA targets (see Section 4)</td><td>Gives the SLA Breach checkbox something to measure against. Without it, the checkbox has no logic behind it.</td></tr>
-      <tr><td>SLA Tier</td><td>Dropdown</td><td>Standard · Priority · Enterprise</td><td>Optional now — required if clients are ever on differentiated contracts. Seed it early.</td></tr>
-      <tr><td>Escalation Date</td><td>Date</td><td>Set manually when escalation occurs <span class="badge ber">ER: auto-set on checkbox</span></td><td>Tracks when a case left CX hands. Required for aging and accountability.</td></tr>
-      <tr><td>Escalation Notes</td><td>Text area</td><td>Free text — required when Escalated = true</td><td>Captures what is blocked and what the escalated person needs to do. Lost without a dedicated field.</td></tr>
-      <tr><td>Steps to Reproduce</td><td>Text area</td><td>Free text — required for Bug/Defect and Integration Issue types <span class="badge ber">ER: conditional required</span></td><td>Dev cannot investigate without reproduction steps. Non-negotiable for any Dev handoff.</td></tr>
-      <tr><td>Workaround Available</td><td>Dropdown</td><td>Yes · No · In Progress</td><td>Manages client expectations while a fix is in progress. Reduces urgency escalations.</td></tr>
-      <tr><td>Resolution Notes</td><td>Text area</td><td>Free text — required before Resolved or Closed <span class="badge ber">ER: enforced by form logic</span></td><td>Documents what fixed the issue. Becomes the knowledge base. Protects in client conversations.</td></tr>
-      <tr><td>Root Cause Category</td><td>Dropdown</td><td>Platform Bug · Configuration Error · Training/Knowledge Gap · Integration Issue · Enhancement Gap · External Dependency · Other</td><td>Builds a product feedback loop over time. Distinguishes training gaps from true defects.</td></tr>
-      <tr><td>Cancelled <em>(Status value)</em></td><td>Status option</td><td>Added to the Status dropdown alongside Closed <span class="badge ber">ER: see Section 10</span></td><td>Distinct from Closed — captures cases withdrawn before resolution without polluting resolution metrics. See usage rules in Section 9.</td></tr>
-      <tr><td>Cancellation Reason</td><td>Dropdown</td><td>Submitted in error · Duplicate · Client withdrew request · Issue resolved itself · Out of scope · Other (requires a brief note) <span class="badge ber">ER: conditional on Status = Cancelled</span></td><td>Required when Status = Cancelled. Dropdown keeps the data clean and reportable. Over time surfaces patterns — frequent "Submitted in error" signals a form or training gap. Currently a plain field; conditional display requires platform logic (see Section 10).</td></tr>
+      <tr>
+        <td>Account / Company</td>
+        <td>Free form text</td>
+        <td>Client name as entered</td>
+        <td>Free form for now. A structured dropdown linked to a client master list is a future enhancement once the platform supports it.</td>
+      </tr>
+      <tr>
+        <td>Cancellation Reason</td>
+        <td>Dropdown</td>
+        <td>Submitted in error · Duplicate · Client withdrew request · Issue resolved itself · Out of scope · Other</td>
+        <td>Required when Status = Cancelled. "Other" should include a brief note. Conditional display (field only appears when Status = Cancelled) is a future enhancement.</td>
+      </tr>
+      <tr>
+        <td>Expected Resolution Date</td>
+        <td>Date</td>
+        <td>Set manually at triage based on Priority working targets (see Section 4)</td>
+        <td>Entered manually by Tracey at triage. Enables reporting on cases past their expected date using saved views. Replaces "Target Resolution Date" — naming reflects that these are working targets, not contracted SLA commitments.</td>
+      </tr>
+      <tr>
+        <td>Tier</td>
+        <td>Dropdown</td>
+        <td>To be defined based on Transform pricing plans</td>
+        <td>Formerly "SLA Tier." Renamed to reflect that tiers will align to Transform's pricing structure once defined. Placeholder for now — seed it early so the field exists when tiers are formalized.</td>
+      </tr>
+      <tr>
+        <td>Root Cause Category</td>
+        <td>Free form text</td>
+        <td>Free text — describe the root cause at resolution</td>
+        <td>Free form for now rather than a predefined list. May evolve into a structured dropdown (potentially aligned to Transform Segments) once patterns emerge from real case data.</td>
+      </tr>
+      <tr>
+        <td>Transform Ticket Link</td>
+        <td>URL / Text</td>
+        <td>Link to the corresponding internal Dev ticket</td>
+        <td>Allows Tracey to see Dev review status, sprint assignment, and design stage without leaving the case. Critical for tracking escalated cases through the Dev pipeline. Paste the ticket URL directly into this field.</td>
+      </tr>
+    </tbody>
+  </table></div>
+
+  <h3>Manual Reporting Views to Build</h3>
+  <p>These are saved views Jose confirmed are achievable using existing and new fields — no automation required.</p>
+  <div class="tw"><table>
+    <thead><tr><th>View</th><th>How It Works</th><th>Cadence</th></tr></thead>
+    <tbody>
+      <tr><td>Cases past Expected Resolution Date</td><td>Filter: Status not Resolved, Closed, or Cancelled AND Expected Resolution Date is before today. Requires Tracey to manually set Expected Resolution Date at triage for every case.</td><td>Daily review</td></tr>
+      <tr><td>Cases not updated in 5+ business days</td><td>Filter: Status not Closed or Cancelled AND Last Modified At is more than 5 business days ago. Uses the existing Last Modified At system field — no new field needed.</td><td>Daily review</td></tr>
     </tbody>
   </table></div>
 </div>
@@ -194,32 +237,36 @@
       <tr><td>Other</td><td><span class="badge bany">Any</span></td><td>Tracey triages and re-classifies first</td><td>No alert until re-classified</td></tr>
     </tbody>
   </table></div>
-  <div class="callout cp"><div class="ct">Rule of Thumb</div>Dev gets tagged on anything requiring a code fix or platform-side investigation. Alec gets looped when it is client-facing severity — Critical, service disruption, compliance, or any escalated case past SLA. Joe and Jose are the destination for Feature Requests only — not active triage participants.</div>
+  <div class="callout cp"><div class="ct">Rule of Thumb</div>Dev gets tagged on anything requiring a code fix or platform-side investigation. Alec gets looped when it is client-facing severity — Critical, service disruption, compliance, or any escalated case past its expected resolution date. Joe and Jose are the destination for Feature Requests only — not active triage participants.</div>
 </div>
 
 
 <!-- S4 -->
 <div class="section" id="s4">
   <div class="slabel">Section 4</div>
-  <h2 class="st">SLA Best Practices</h2>
-  <p>Transform does not currently have automated SLA breach logic. The targets below represent best practice for a team of this size and client profile. Confirm with Alec before communicating any SLA commitments externally.</p>
-  <div class="callout ca"><div class="ct">Current State</div>The SLA Breach checkbox is a manual flag. Until Target Resolution Date is added and auto-trigger logic is built (see Section 10), SLA monitoring requires a manual daily review using the Created At and Last Modified At fields that already exist in the form.</div>
+  <h2 class="st">SLA Working Targets</h2>
+  <p>These are internal working targets agreed as a starting point. They are not contracted SLA commitments — formal SLA terms require a company-wide agreement with Alec and the broader team, informed by the NetSuite reference Alec shared. This guide will be updated once that agreement is reached.</p>
+
+  <div class="callout ca"><div class="ct">Important</div>Do not communicate these targets externally as SLA guarantees. They are operational guidelines for how Tracey and the team manage case response internally while the formal SLA framework is being defined.</div>
+
   <div class="tw"><table>
-    <thead><tr><th>Priority</th><th>First Response Target</th><th>Resolution Target</th><th>Breach = When This Is Missed</th></tr></thead>
+    <thead><tr><th>Priority</th><th>First Response Target</th><th>Expected Resolution</th><th>Notes</th></tr></thead>
     <tbody>
-      <tr class="sc"><td>Critical</td><td>2 business hours</td><td>Same business day</td><td>No first response in 2 hrs, or not Resolved by EOD</td></tr>
-      <tr class="sh"><td>High</td><td>4 business hours</td><td>1 business day</td><td>Past Target Resolution Date without Resolved/Closed status</td></tr>
-      <tr class="sm"><td>Medium</td><td>1 business day</td><td>3 business days</td><td>Past Target Resolution Date without Resolved/Closed status</td></tr>
-      <tr class="sl"><td>Low</td><td>2 business days</td><td>7 business days</td><td>Past Target Resolution Date without Resolved/Closed status</td></tr>
+      <tr class="sc"><td>Critical</td><td>As soon as possible</td><td>Same business day</td><td>Alert Dev + Alec immediately. Set Expected Resolution Date to today.</td></tr>
+      <tr class="sh"><td>High</td><td>Same business day</td><td>2 business days</td><td>Alert Dev within 4 hours. Set Expected Resolution Date accordingly.</td></tr>
+      <tr class="sm"><td>Medium</td><td>Next business day</td><td>4 business days</td><td>Route to appropriate owner. Set Expected Resolution Date accordingly.</td></tr>
+      <tr class="sl"><td>Low</td><td>Within 2 business days</td><td>7 business days</td><td>Queue for next available. Set Expected Resolution Date accordingly.</td></tr>
     </tbody>
   </table></div>
-  <div class="callout cp"><div class="ct">Cancelled Cases and SLA</div>Cancelled cases must be excluded from SLA breach metrics. A case that was withdrawn before work began should not be measured against response or resolution targets — including it would artificially inflate breach rates and distort reporting.</div>
-  <h3>Manual SLA Monitoring — Daily Habit Until Automation Exists</h3>
+
+  <div class="callout cp"><div class="ct">Cancelled Cases and SLA</div>Cancelled cases must be excluded from all SLA reporting. A case withdrawn before work began should not factor into response or resolution metrics.</div>
+
+  <h3>Manual SLA Monitoring — Daily Habit</h3>
   <ul class="rl">
-    <li data-n="1">Each morning, review all open cases using Created At and Last Modified At to identify elapsed time.</li>
-    <li data-n="2">Any case where elapsed time since creation exceeds the resolution target for its Priority — manually check SLA Breach.</li>
-    <li data-n="3">Any Critical or High case not moving within the first response window — contact the assigned owner directly before flagging the breach.</li>
-    <li data-n="4">Any case with Last Modified At older than 5 business days regardless of priority — treat as stale and address proactively.</li>
+    <li data-n="1">Each morning, open the "Cases past Expected Resolution Date" saved view.</li>
+    <li data-n="2">For any case past its date — check the SLA Breach checkbox manually and review whether escalation is needed.</li>
+    <li data-n="3">Any Critical or High case not moving — contact the assigned owner directly before flagging the breach.</li>
+    <li data-n="4">Open the "Cases not updated in 5+ days" view — any stale case needs a status update or proactive client outreach.</li>
     <li data-n="5">When a breach occurs, reach out to the client before they reach out to you.</li>
   </ul>
 </div>
@@ -229,16 +276,16 @@
 <div class="section" id="s5">
   <div class="slabel">Section 5</div>
   <h2 class="st">Awaiting Response — Rename Recommendation</h2>
-  <p>The Status dropdown already includes <strong>Waiting on Customer</strong>, which captures the state where client action is needed before the case can progress. The <strong>Awaiting Response checkbox</strong> as currently named describes the same condition — making it redundant.</p>
-  <p>The recommendation is to <strong>rename the Awaiting Response checkbox to "Awaiting Internal Response."</strong> This creates a meaningful distinction between two different blocked states that the current form cannot differentiate.</p>
+  <p>The Status dropdown already includes <strong>Waiting on Customer</strong>, which captures the state where client action is needed. The <strong>Awaiting Response checkbox</strong> as currently named describes the same condition — making it redundant.</p>
+  <p>The recommendation is to <strong>rename the Awaiting Response checkbox to "Awaiting Internal Response"</strong> — signaling that the ball is in Dev or Alec's court, not the client's. This is a field rename only, no logic change required.</p>
   <div class="cg">
     <div class="cb cba">
       <h4>Status: Waiting on Customer</h4>
       <ul>
         <li>Progress is blocked on the client</li>
         <li>A follow-up has been sent and a client response is required</li>
-        <li>Already exists in the Status dropdown — no change needed</li>
-        <li>Unset when: client responds, status moves to In Progress</li>
+        <li>Already exists — no change needed</li>
+        <li>Unset when: client responds → back to In Progress</li>
       </ul>
     </div>
     <div class="cb cbb">
@@ -251,8 +298,7 @@
       </ul>
     </div>
   </div>
-  <div class="callout cp"><div class="ct">Usage Rule</div>A case can be both <em>Waiting on Customer</em> (status) and <em>Awaiting Internal Response</em> (checkbox) simultaneously — waiting for the client to confirm AND waiting for Dev to validate a fix. They are independent signals, not alternatives.</div>
-  <div class="callout ca"><div class="ct">Enhancement Request</div>Log a request to Jose to rename the "Awaiting Response" checkbox to "Awaiting Internal Response." Field rename only — no logic change required. See Section 10.</div>
+  <div class="callout cp"><div class="ct">Usage Rule</div>A case can be both <em>Waiting on Customer</em> (status) and <em>Awaiting Internal Response</em> (checkbox) at the same time — waiting for client confirmation AND waiting for Dev to validate a fix. They are independent signals, not alternatives.</div>
 </div>
 
 
@@ -267,13 +313,13 @@
     <li data-n="1">Set <strong>Status = Escalated</strong></li>
     <li data-n="2">Check the <strong>Escalated checkbox</strong></li>
     <li data-n="3">Populate <strong>Escalated To</strong> with a specific teammate — never a team or queue</li>
-    <li data-n="4">Populate <strong>Escalation Notes</strong>: what is blocked, what the escalated person needs to do, and the urgency level</li>
-    <li data-n="5">Set <strong>Escalation Date</strong> manually at the time of escalation</li>
+    <li data-n="4">Paste the <strong>Transform Ticket Link</strong> if a Dev ticket has been created</li>
+    <li data-n="5">Add <strong>Escalation Notes</strong>: what is blocked, what the escalated person needs to do, urgency level</li>
     <li data-n="6">Notify the escalated person directly via Slack — do not rely on the platform to alert them</li>
   </ul>
   <h3>When to Escalate</h3>
   <ul class="tl">
-    <li>Any Critical or High case not resolved within the SLA target</li>
+    <li>Any Critical or High case not resolved within the working target</li>
     <li>Any case requiring a code fix or platform-side investigation (→ Dev)</li>
     <li>Any case involving data integrity, security, or compliance (→ Alec)</li>
     <li>Any case where the client has expressed urgency beyond normal channels</li>
@@ -284,7 +330,7 @@
   <ul class="rl">
     <li data-n="1">When Dev or Alec resolves their piece, update Status back to <strong>In Progress</strong></li>
     <li data-n="2">Uncheck the <strong>Escalated checkbox</strong></li>
-    <li data-n="3">Add a note to <strong>Escalation Notes</strong> documenting what was resolved and by whom</li>
+    <li data-n="3">Update Escalation Notes with what was resolved and by whom</li>
     <li data-n="4">Reassign to the appropriate owner to complete resolution</li>
     <li data-n="5">Do not close a case while the Escalated checkbox is still checked — de-escalate first</li>
   </ul>
@@ -298,27 +344,35 @@
   <h3>Triage</h3>
   <div class="bpg">
     <div class="bpc"><h4><span class="ico">T</span>Daily triage habit</h4>Build a morning check of all New cases. Any case in New status overnight without being triaged is a risk. Target: all New cases triaged within 24 hours of submission.</div>
-    <div class="bpc"><h4><span class="ico">5</span>The 5-field minimum</h4>Account, Priority, Type, Assignee, and Team/Queue must all be populated before a case leaves Triaged status. If any are missing, the case is reviewed — not triaged.</div>
+    <div class="bpc"><h4><span class="ico">5</span>The 5-field minimum</h4>Account, Priority, Type, Assignee, and Expected Resolution Date must all be set before a case leaves Triaged status. If any are missing, the case is reviewed — not triaged.</div>
     <div class="bpc"><h4><span class="ico b">→</span>Triage is not a holding state</h4>A case should not remain in Triaged status for more than 1 business day. If it does, the assigned owner has not acknowledged or begun work.</div>
     <div class="bpc"><h4><span class="ico a" style="color:#373A45">!</span>Critical bypass</h4>Critical and High cases bypass normal queue order — alert Dev and/or Alec immediately, then complete triage fields. Speed of first response takes priority over perfect classification.</div>
   </div>
   <h3>Resolution Notes</h3>
   <div class="bpg">
-    <div class="bpc"><h4><span class="ico r">R</span>Required to close</h4>Resolution Notes must be populated before any case moves to Resolved or Closed. This is a standing operational rule until it can be enforced by platform logic (see Section 10).</div>
-    <div class="bpc"><h4><span class="ico">K</span>What a good note includes</h4>(1) Root cause. (2) What was done to fix it. (3) Client communication or verification. Over time these become searchable answers for recurring issues.</div>
+    <div class="bpc"><h4><span class="ico r">R</span>Required to close</h4>Resolution Notes must be populated before any case moves to Resolved or Closed. This is a standing operational rule — not yet enforced by platform logic.</div>
+    <div class="bpc"><h4><span class="ico">K</span>What a good note includes</h4>(1) Root cause. (2) What was done to fix it. (3) Client communication or verification step. Over time these become searchable answers for recurring issues.</div>
   </div>
   <div class="callout cs"><div class="ct">Good vs. Bad Resolution Note</div><strong>Bad:</strong> "Fixed." or "Resolved by Dev." — No root cause, no reuse value.<br><br><strong>Good:</strong> "User lacked the correct role in Transform. Added CX Viewer role to their account. Walked client through verification on call 3/15. Root cause: roles not provisioned during initial onboarding. Added to onboarding checklist."</div>
+  <h3>Transform Ticket Link — How to Use It</h3>
+  <p>When a case is escalated to Dev and a ticket is created in the Dev backlog, paste the ticket URL into the Transform Ticket Link field. This gives you a direct line of sight into:</p>
+  <ul class="rl">
+    <li data-n="1">Whether Dev has reviewed the issue</li>
+    <li data-n="2">Whether it is in design, in progress, or in a sprint</li>
+    <li data-n="3">Which sprint it is assigned to and what the expected delivery window is</li>
+    <li data-n="4">Whether it has been deprioritized or is blocked internally</li>
+  </ul>
+  <p style="margin-top:12px;">Check the linked ticket as part of the daily escalation review. If a ticket has not moved in 5+ days, that is the signal to follow up with Dev directly — not to wait for them to update the case.</p>
   <h3>Reporting — What to Track</h3>
   <div class="tw"><table>
     <thead><tr><th>Report / View</th><th>What It Shows</th><th>Cadence</th><th>Audience</th></tr></thead>
     <tbody>
       <tr><td>Open cases by account</td><td>Workload distribution across clients</td><td>Weekly</td><td>Tracey + Alec</td></tr>
-      <tr><td>Cases past SLA target</td><td>Open cases where elapsed time exceeds Priority target — exclude Cancelled</td><td>Daily</td><td>Tracey</td></tr>
-      <tr><td>Cases not updated in 5+ days</td><td>Stale cases — filter by Last Modified At — exclude Cancelled and Closed</td><td>Daily</td><td>Tracey</td></tr>
-      <tr><td>Escalated open cases</td><td>Cases currently with Dev or Alec — are they moving?</td><td>Daily</td><td>Tracey</td></tr>
+      <tr><td>Cases past Expected Resolution Date</td><td>Open cases where Expected Resolution Date has passed — excludes Cancelled</td><td>Daily</td><td>Tracey</td></tr>
+      <tr><td>Cases not updated in 5+ days</td><td>Filter on Last Modified At — excludes Closed and Cancelled</td><td>Daily</td><td>Tracey</td></tr>
+      <tr><td>Escalated open cases</td><td>Cases currently with Dev or Alec — check Transform Ticket Link for status</td><td>Daily</td><td>Tracey</td></tr>
       <tr><td>Case volume by type</td><td>Recurring categories — signals training, config, or product gaps</td><td>Monthly</td><td>Tracey + Jose</td></tr>
-      <tr><td>Resolved cases by root cause</td><td>Platform Bug vs. Config Error vs. Training Gap — product signal</td><td>Monthly</td><td>Tracey + Jose + Alec</td></tr>
-      <tr><td>Cancelled cases by reason</td><td>Volume and reason trends — signals form clarity or training gaps</td><td>Monthly</td><td>Tracey + Jose</td></tr>
+      <tr><td>Cancelled cases by reason</td><td>Volume and reason trends — frequent "Submitted in error" signals a form or training gap</td><td>Monthly</td><td>Tracey + Jose</td></tr>
       <tr><td>Feature request log</td><td>All Feature Request cases with client name and use case</td><td>Monthly or as needed</td><td>Tracey + Joe + Jose</td></tr>
     </tbody>
   </table></div>
@@ -342,9 +396,9 @@
       <tr><td>Purpose</td><td>Classify, prioritize, and route the case</td><td>Investigate, fix, communicate, and close the case</td></tr>
       <tr><td>Owner</td><td>Always Tracey — triage belongs to CX regardless of where the case routes next</td><td>Assigned owner (CX, Dev, or both)</td></tr>
       <tr><td>Duration</td><td>5–15 minutes per case</td><td>Hours to days depending on complexity</td></tr>
-      <tr><td>What happens</td><td>Account, Priority, Type, Assignee, Team/Queue set. Target Resolution Date set. Alerts sent if Critical/High.</td><td>Work performed. Client updated. Notes captured throughout. Resolution Notes required before close.</td></tr>
+      <tr><td>What happens</td><td>Account, Priority, Type, Assignee, Expected Resolution Date set. Alerts sent if Critical/High. Transform Ticket Link added if Dev ticket exists.</td><td>Work performed. Client updated. Notes captured throughout. Resolution Notes required before close.</td></tr>
       <tr><td>Status result</td><td>New → Triaged → In Progress (within 1 business day)</td><td>In Progress → Resolved → Closed</td></tr>
-      <tr><td>Failure mode</td><td>Triage becomes a holding state — cases sit indefinitely with no active owner</td><td>Case closes without Resolution Notes, leaving no institutional memory</td></tr>
+      <tr><td>Failure mode</td><td>Triage becomes a holding state — cases sit indefinitely with no active owner and no expected resolution date</td><td>Case closes without Resolution Notes, leaving no institutional memory</td></tr>
     </tbody>
   </table></div>
   <div class="callout cp"><div class="ct">Key Distinction</div>Triage answers: <em>What is this, who owns it, and how urgent is it?</em><br>Resolution answers: <em>What was wrong, what fixed it, and is the client satisfied?</em></div>
@@ -355,7 +409,7 @@
 <div class="section" id="s9">
   <div class="slabel">Section 9</div>
   <h2 class="st">Case Lifecycle Flowchart</h2>
-  <p>The lifecycle runs left column top to bottom. Three branch states can occur mid-lifecycle on the right. Cancelled is a terminal state that can exit from any point in the lifecycle before Resolved.</p>
+  <p>The lifecycle runs left column top to bottom. Three branch states can occur mid-lifecycle on the right. Cancelled is a terminal state reachable from any point before Resolved.</p>
   <div class="fc">
     <svg width="100%" viewBox="0 0 680 610" xmlns="http://www.w3.org/2000/svg" style="font-family:'DM Sans',-apple-system,sans-serif;">
       <defs>
@@ -366,12 +420,9 @@
           <path d="M2 1L8 5L2 9" fill="none" stroke="#B0B4C4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
         </marker>
       </defs>
-
-      <!-- Column labels -->
       <text x="190" y="16" text-anchor="middle" font-size="11" font-weight="600" fill="#9095A8" letter-spacing="0.08em">CASE LIFECYCLE</text>
       <text x="522" y="16" text-anchor="middle" font-size="11" font-weight="600" fill="#9095A8" letter-spacing="0.08em">BRANCH STATES</text>
       <line x1="376" y1="24" x2="376" y2="590" stroke="#D8DAE5" stroke-width="0.75" stroke-dasharray="5 3"/>
-
       <!-- Main trunk -->
       <line x1="190" y1="68" x2="190" y2="100" stroke="#9095A8" stroke-width="1.2" marker-end="url(#mka)"/>
       <line x1="190" y1="156" x2="190" y2="196" stroke="#9095A8" stroke-width="1.2" marker-end="url(#mka)"/>
@@ -379,59 +430,44 @@
       <line x1="190" y1="332" x2="190" y2="368" stroke="#9095A8" stroke-width="1.2" marker-end="url(#mka)"/>
       <line x1="190" y1="412" x2="190" y2="448" stroke="#9095A8" stroke-width="1.2" marker-end="url(#mka)"/>
       <line x1="190" y1="492" x2="190" y2="528" stroke="#9095A8" stroke-width="1.2" marker-end="url(#mka)"/>
-
       <!-- Branch connectors -->
       <line x1="340" y1="122" x2="404" y2="122" stroke="#9095A8" stroke-width="1.2" marker-end="url(#mka)"/>
       <line x1="340" y1="218" x2="404" y2="218" stroke="#9095A8" stroke-width="1.2" marker-end="url(#mka)"/>
       <line x1="340" y1="304" x2="404" y2="304" stroke="#9095A8" stroke-width="1.2" marker-end="url(#mka)"/>
-
-      <!-- Cancelled exit arrow — from left column mid-point outward -->
+      <!-- Cancelled exit -->
       <path d="M190 390 L190 430 L404 430" fill="none" stroke="#B0B4C4" stroke-width="1" stroke-dasharray="5 3" marker-end="url(#mkc)"/>
       <text x="290" y="424" font-size="10" fill="#B0B4C4" text-anchor="middle">any point before resolved</text>
-
-      <!-- Return: Waiting on Customer → In Progress -->
+      <!-- Return arrow -->
       <path d="M404 202 L386 202 L386 194 L340 194" fill="none" stroke="#B0B4C4" stroke-width="1" stroke-dasharray="5 3" marker-end="url(#mkc)"/>
       <text x="394" y="193" font-size="10" fill="#B0B4C4" text-anchor="middle">client responds</text>
-
-      <!-- == LEFT COLUMN == -->
+      <!-- LEFT COLUMN -->
       <rect x="40" y="24" width="300" height="44" rx="8" fill="#F3F4F9" stroke="#C8CAD6" stroke-width="1"/>
       <text x="190" y="51" text-anchor="middle" font-size="13" font-weight="600" fill="#373A45">Case submitted</text>
-
       <rect x="40" y="100" width="300" height="56" rx="8" fill="#EEEDFB" stroke="#796DED" stroke-width="1"/>
       <text x="190" y="124" text-anchor="middle" font-size="13" font-weight="600" fill="#4B3DB5">Triage</text>
-      <text x="190" y="143" text-anchor="middle" font-size="11" fill="#6B5FCC">Account · Priority · Assignee · Team/Queue</text>
-
+      <text x="190" y="143" text-anchor="middle" font-size="11" fill="#6B5FCC">Account · Priority · Expected Resolution Date</text>
       <rect x="40" y="196" width="300" height="44" rx="8" fill="#EAF1FE" stroke="#7CA6F6" stroke-width="1"/>
       <text x="190" y="223" text-anchor="middle" font-size="13" font-weight="600" fill="#1553A8">In progress</text>
-
       <rect x="40" y="276" width="300" height="56" rx="8" fill="#EAF1FE" stroke="#7CA6F6" stroke-width="1"/>
       <text x="190" y="300" text-anchor="middle" font-size="13" font-weight="600" fill="#1553A8">Resolution notes</text>
       <text x="190" y="319" text-anchor="middle" font-size="11" fill="#3A6FC0">Required before status change</text>
-
       <rect x="40" y="368" width="300" height="44" rx="8" fill="#DDEEF1" stroke="#3498A8" stroke-width="1"/>
       <text x="190" y="395" text-anchor="middle" font-size="13" font-weight="600" fill="#1A6372">Resolved</text>
-
       <rect x="40" y="448" width="300" height="44" rx="8" fill="#D4EDE1" stroke="#2E8A5C" stroke-width="1"/>
       <text x="190" y="475" text-anchor="middle" font-size="13" font-weight="600" fill="#1A5438">Closed</text>
-
-      <!-- == RIGHT COLUMN == -->
+      <!-- RIGHT COLUMN -->
       <rect x="404" y="94" width="236" height="56" rx="8" fill="#FFF0EE" stroke="#F64F3B" stroke-width="1"/>
       <text x="522" y="118" text-anchor="middle" font-size="13" font-weight="600" fill="#C0291A">Immediate alert</text>
       <text x="522" y="137" text-anchor="middle" font-size="11" fill="#C0291A">Critical/High → Dev + Alec</text>
-
       <rect x="404" y="190" width="236" height="56" rx="8" fill="#FFF7E0" stroke="#E5A800" stroke-width="1"/>
       <text x="522" y="214" text-anchor="middle" font-size="13" font-weight="600" fill="#7A5200">Waiting on customer</text>
       <text x="522" y="233" text-anchor="middle" font-size="11" fill="#7A5200">Status + Awaiting Int. Response</text>
-
       <rect x="404" y="276" width="236" height="56" rx="8" fill="#FDEEE8" stroke="#D4603A" stroke-width="1"/>
       <text x="522" y="300" text-anchor="middle" font-size="13" font-weight="600" fill="#8C2D10">Escalated</text>
-      <text x="522" y="319" text-anchor="middle" font-size="11" fill="#8C2D10">Checkbox + Escalated To + Notes</text>
-
-      <!-- Cancelled terminal state -->
+      <text x="522" y="319" text-anchor="middle" font-size="11" fill="#8C2D10">Checkbox + Escalated To + Ticket Link</text>
       <rect x="404" y="404" width="236" height="56" rx="8" fill="#F4F4F6" stroke="#9095A8" stroke-width="1" stroke-dasharray="5 3"/>
       <text x="522" y="428" text-anchor="middle" font-size="13" font-weight="600" fill="#5A5E6E">Cancelled</text>
       <text x="522" y="447" text-anchor="middle" font-size="11" fill="#9095A8">Cancellation Reason required</text>
-
     </svg>
   </div>
 
@@ -439,44 +475,189 @@
   <div class="tw"><table>
     <thead><tr><th>Status</th><th>Who Acts</th><th>Required Actions</th><th>Exit Condition</th></tr></thead>
     <tbody>
-      <tr><td>New</td><td>Tracey</td><td>Within 24 hrs: set Account, Priority, Type, Assignee, Team/Queue, Target Resolution Date. Alert Dev/Alec if Critical/High.</td><td>All required fields populated → Triaged</td></tr>
-      <tr><td>Triaged</td><td>Assigned Owner</td><td>Acknowledge the case. Begin investigation. Confirm Steps to Reproduce if Bug/Defect type.</td><td>Work started → In Progress within 1 business day</td></tr>
-      <tr><td>In Progress</td><td>Assigned Owner</td><td>Work case. Update with notes as you go. If blocked on client → Waiting on Customer. If blocked on Dev/Alec → Escalate. If case is no longer needed → Cancelled.</td><td>Resolution path identified, notes drafted → Resolution Notes step</td></tr>
+      <tr><td>New</td><td>Tracey</td><td>Within 24 hrs: set Account, Priority, Type, Assignee, Expected Resolution Date. Alert Dev/Alec if Critical/High.</td><td>All required fields populated → Triaged</td></tr>
+      <tr><td>Triaged</td><td>Assigned Owner</td><td>Acknowledge the case. Begin investigation. Add Transform Ticket Link if Dev ticket is created.</td><td>Work started → In Progress within 1 business day</td></tr>
+      <tr><td>In Progress</td><td>Assigned Owner</td><td>Work case. Update with notes as you go. If blocked on client → Waiting on Customer. If blocked on Dev/Alec → Escalate. If no longer needed → Cancelled.</td><td>Resolution path identified, notes drafted → Resolution Notes step</td></tr>
       <tr><td>Waiting on Customer</td><td>Tracey</td><td>Set status + Awaiting Internal Response checkbox. Send follow-up. If no client response after 5 business days: notify client and move to Closed with a note, or Cancelled if appropriate.</td><td>Client responds → In Progress</td></tr>
-      <tr><td>Escalated</td><td>Escalated To person</td><td>Must acknowledge within SLA window. Tracey monitors daily. Update Escalation Notes with progress. De-escalate when piece is resolved.</td><td>Escalated person resolves → In Progress, uncheck Escalated</td></tr>
+      <tr><td>Escalated</td><td>Escalated To person</td><td>Must acknowledge within working target window. Tracey monitors daily via Transform Ticket Link. Update Escalation Notes with progress. De-escalate when piece is resolved.</td><td>Escalated person resolves → In Progress, uncheck Escalated</td></tr>
       <tr><td>Resolved</td><td>Tracey</td><td>Confirm Resolution Notes are populated. Notify client. Allow 2 business days for client confirmation before Closed.</td><td>Client confirms or 2 days pass → Closed</td></tr>
       <tr><td>Closed</td><td>Tracey</td><td>No further action. Case locked for reporting.</td><td>Terminal state. If issue recurs, open a new case and reference this one.</td></tr>
-      <tr><td>Cancelled</td><td>Tracey</td><td>Set Status = Cancelled. Select Cancellation Reason from dropdown. If reason is Other, add a brief note. Do not populate Resolution Notes. Exclude from SLA reporting.</td><td>Terminal state. If the underlying issue resurfaces, open a new case — do not reopen a cancelled case.</td></tr>
+      <tr><td>Cancelled</td><td>Tracey</td><td>Set Status = Cancelled. Select Cancellation Reason. If Other, add a brief note. Do not populate Resolution Notes. Exclude from SLA reporting.</td><td>Terminal state. If the issue resurfaces, open a new case — do not reopen a cancelled case.</td></tr>
     </tbody>
   </table></div>
-
-  <div class="callout cp"><div class="ct">Closed vs. Cancelled</div>
-    <strong>Closed</strong> means the case reached a resolution — work was done, the client was satisfied, and Resolution Notes exist.<br><br>
-    <strong>Cancelled</strong> means the case was withdrawn before resolution — no fix was needed or delivered. Using Closed for unworked cases pollutes resolution metrics and makes reporting unreliable.
-  </div>
+  <div class="callout cp"><div class="ct">Closed vs. Cancelled</div><strong>Closed</strong> means the case reached a resolution — work was done, the client was satisfied, Resolution Notes exist.<br><br><strong>Cancelled</strong> means the case was withdrawn before resolution — no fix was needed or delivered. Using Closed for unworked cases pollutes resolution metrics.</div>
 </div>
 
 
 <!-- S10 -->
 <div class="section" id="s10">
   <div class="slabel">Section 10</div>
-  <h2 class="st">Enhancement Requests for Jose</h2>
-  <p>The items below represent platform improvements that would reduce manual overhead and enforce operational consistency. These are not current capabilities — they are proposed enhancements to be logged and prioritized with Jose. Each can be submitted as a Feature Request/Enhancement case type.</p>
-  <div class="callout ca"><div class="ct">Submission Note</div>Log each item as a separate Feature Request/Enhancement case so they can be individually prioritized. Lead with the three quick wins: the checkbox rename, and the two saved views — those require no logic changes and deliver immediate value.</div>
-  <ul class="erl">
-    <li><strong>Rename "Awaiting Response" to "Awaiting Internal Response"</strong> — field rename only, no logic change. Eliminates overlap with the Waiting on Customer status.</li>
-    <li><strong>Add Cancelled as a Status option</strong> — new terminal status value alongside Closed. Distinct meaning: case withdrawn before resolution. No Resolution Notes required.</li>
-    <li><strong>Cancellation Reason field — conditionally required when Status = Cancelled</strong> — dropdown with values: Submitted in error · Duplicate · Client withdrew request · Issue resolved itself · Out of scope · Other (requires brief note). Conditional display and required behavior requires platform logic.</li>
-    <li><strong>Exclude Cancelled cases from SLA Breach reporting</strong> — cases with Status = Cancelled should not be evaluated against first response or resolution targets.</li>
-    <li><strong>Auto-set Escalation Date when Escalated checkbox is checked</strong> — removes manual date entry and ensures escalation timing is always captured.</li>
-    <li><strong>Require Resolution Notes before Resolved or Closed status is selectable</strong> — form validation that prevents closure without documentation. Does not apply to Cancelled.</li>
-    <li><strong>Auto-trigger SLA Breach checkbox when Target Resolution Date has passed and status is not Resolved, Closed, or Cancelled</strong> — eliminates daily manual breach monitoring.</li>
-    <li><strong>Conditional required field: Steps to Reproduce for Bug/Defect and Integration Issue types</strong> — ensures Dev receives reproduction steps on every relevant case.</li>
-    <li><strong>Account / Company field linked to a client master list</strong> — dropdown from an account registry rather than free text, enabling consistent naming and account-level reporting.</li>
-    <li><strong>Auto-set Team/Queue based on Case Type + Priority routing rules</strong> — reduces manual routing and enforces consistent assignment logic.</li>
-    <li><strong>Saved view: Cases past SLA target</strong> — open cases (excluding Cancelled) where time elapsed since Created At exceeds the resolution target for their Priority. For daily manual monitoring until auto-trigger is built.</li>
-    <li><strong>Saved view: Cases not updated in 5+ business days</strong> — filters on Last Modified At relative to today, excluding Cancelled and Closed. Surfaces stale cases before they become client escalations.</li>
-  </ul>
+  <h2 class="st">Confirmed Enhancement Requests</h2>
+  <p>The items below have been reviewed and agreed upon with Jose. Each should be submitted as a <strong>Feature Request/Enhancement</strong> case in Transform so they are formally tracked in the product backlog. Log them as individual cases so they can be prioritized and sprint-assigned separately.</p>
+
+  <div class="callout cn"><div class="ct">How to Submit</div>For each item below, open a new support case in Transform. Set Type = Feature Request/Enhancement. Use the item title as the case title. Add any relevant context in the description — who it impacts, what problem it solves, and any urgency. Tag Jose as the assignee.</div>
+
+  <div class="tw"><table>
+    <thead><tr><th>Enhancement Request</th><th>What It Does</th><th>Priority Signal</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Add Cancelled as a Status option</td>
+        <td>New terminal status distinct from Closed — for cases withdrawn before resolution. No Resolution Notes required.</td>
+        <td><span class="badge bnow">Quick win</span></td>
+      </tr>
+      <tr>
+        <td>Add Cancellation Reason field</td>
+        <td>Dropdown with values: Submitted in error · Duplicate · Client withdrew request · Issue resolved itself · Out of scope · Other. Required when Status = Cancelled.</td>
+        <td><span class="badge bnow">Quick win</span></td>
+      </tr>
+      <tr>
+        <td>Add Account / Company field</td>
+        <td>Free form text for now. Enables client-level filtering and reporting. Critical gap — without it cases from different accounts are indistinguishable.</td>
+        <td><span class="badge bc">High priority</span></td>
+      </tr>
+      <tr>
+        <td>Add Expected Resolution Date field</td>
+        <td>Manual date field set at triage. Foundation for all SLA monitoring and the two saved views below.</td>
+        <td><span class="badge bc">High priority</span></td>
+      </tr>
+      <tr>
+        <td>Add Tier field</td>
+        <td>Dropdown — values TBD based on Transform pricing plans. Placeholder field to be populated once tiers are formally defined.</td>
+        <td><span class="badge bm">Medium priority</span></td>
+      </tr>
+      <tr>
+        <td>Add Root Cause Category field</td>
+        <td>Free form text at resolution. Captures what caused the issue — Platform Bug, Config Error, Training Gap, etc. Builds a knowledge base over time.</td>
+        <td><span class="badge bm">Medium priority</span></td>
+      </tr>
+      <tr>
+        <td>Add Transform Ticket Link field</td>
+        <td>URL/text field. Paste the Dev ticket link when escalating. Gives Tracey visibility into Dev review status, sprint, and design stage without leaving the case.</td>
+        <td><span class="badge bc">High priority</span></td>
+      </tr>
+      <tr>
+        <td>Rename "Awaiting Response" to "Awaiting Internal Response"</td>
+        <td>Field rename only — no logic change. Differentiates internal-blocked state from client-blocked state (Waiting on Customer status).</td>
+        <td><span class="badge bnow">Quick win</span></td>
+      </tr>
+    </tbody>
+  </table></div>
+
+  <h3>Saved Views to Build</h3>
+  <p>These are not enhancement requests — they are manual configuration tasks for Tracey to complete once the relevant fields exist. No platform development required.</p>
+  <div class="tw"><table>
+    <thead><tr><th>View</th><th>Filter Logic</th><th>When to Build</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Cases past Expected Resolution Date</td>
+        <td>Status is not Resolved, Closed, or Cancelled AND Expected Resolution Date is before today</td>
+        <td>Once Expected Resolution Date field is added and populated on at least a few cases</td>
+      </tr>
+      <tr>
+        <td>Cases not updated in 5+ business days</td>
+        <td>Status is not Closed or Cancelled AND Last Modified At is more than 5 business days ago</td>
+        <td>Can be built now — uses the existing Last Modified At system field</td>
+      </tr>
+    </tbody>
+  </table></div>
+</div>
+
+
+<!-- S11 -->
+<div class="section" id="s11">
+  <div class="slabel">Section 11</div>
+  <h2 class="st">Reporting &amp; Analytics</h2>
+  <p>Transform supports saved views, charts, dashboards, grouping and aggregation, and CSV/Excel export. The reports below are organized by what is buildable today vs. what becomes available once the confirmed new fields are in place.</p>
+
+  <div class="callout cn"><div class="ct">Platform Capabilities Confirmed</div>Saved views &middot; Charts and graphs &middot; Dashboards &middot; Group by field and count &middot; Export to CSV / Excel. All reports below are achievable within Transform&rsquo;s current feature set &mdash; no external tools needed.</div>
+
+  <h3>Build Now &mdash; Using Existing Fields Only</h3>
+  <p>These reports can be created immediately. No new fields required.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Report</th><th>Type</th><th>Group / Filter By</th><th>What It Tells You</th></tr></thead>
+    <tbody>
+      <tr><td>Cases by Status</td><td>Chart + saved view</td><td>Group by Status, count</td><td>Snapshot of your open vs. in-progress vs. resolved vs. cancelled pipeline. The core operational health view.</td></tr>
+      <tr><td>Cases by Priority</td><td>Chart + saved view</td><td>Group by Priority, count</td><td>Where workload is concentrated. A spike in Critical or High is an early warning signal before it becomes a client escalation.</td></tr>
+      <tr><td>Cases by Type</td><td>Chart + saved view</td><td>Group by Type, count</td><td>What categories are recurring. Frequent Bug/Defect = product signal. Frequent How To = training gap. Frequent Feature Request = product demand.</td></tr>
+      <tr><td>Cases by Assignee</td><td>Saved view</td><td>Group by Assignee, count</td><td>Individual workload distribution. Surfaces if CX is carrying too much without visibility as the team scales.</td></tr>
+      <tr><td>Escalated open cases</td><td>Saved view</td><td>Filter: Escalated = checked AND Status not Closed or Cancelled</td><td>Everything currently sitting with Dev or Alec. Daily check &mdash; cross-reference Transform Ticket Link for sprint/review status.</td></tr>
+      <tr><td>SLA Breach cases</td><td>Saved view</td><td>Filter: SLA Breach = checked AND Status not Closed or Cancelled</td><td>Everything already past its working target. Drives proactive client outreach.</td></tr>
+      <tr><td>Cases not updated in 5+ days</td><td>Saved view</td><td>Filter: Last Modified At older than 5 business days AND Status not Closed or Cancelled</td><td>Stale case detection. Buildable immediately using the existing Last Modified At field.</td></tr>
+      <tr><td>Awaiting Internal Response</td><td>Saved view</td><td>Filter: Awaiting Internal Response = checked</td><td>Everything waiting on Dev or Alec. Shows internal bottlenecks distinct from client-blocked cases.</td></tr>
+      <tr><td>Cases opened this month</td><td>Chart</td><td>Filter: Created At = current month, group by Type or Priority</td><td>Monthly intake volume and mix. Useful for Alec reporting and product cadence with Jose.</td></tr>
+      <tr><td>Cases resolved this month</td><td>Chart</td><td>Filter: Status = Resolved or Closed AND Last Modified At = current month</td><td>Monthly throughput. Compare to opened volume to see if the queue is growing or shrinking.</td></tr>
+      <tr><td>Feature request log</td><td>Saved view</td><td>Filter: Type = Feature Request/Enhancement AND Status not Closed or Cancelled</td><td>Running list of open feature requests. Export to CSV for product cadence with Joe and Jose.</td></tr>
+      <tr><td>Cancelled cases by reason</td><td>Chart + saved view</td><td>Group by Cancellation Reason, count</td><td>Available once Cancellation Reason field is added. Frequent &ldquo;Submitted in error&rdquo; = form clarity issue. Frequent &ldquo;Duplicate&rdquo; = training gap.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Build Once New Fields Are Added</h3>
+  <p>These become available after Account / Company and Expected Resolution Date are in place and being populated consistently at triage.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Report</th><th>Type</th><th>Group / Filter By</th><th>What It Tells You</th></tr></thead>
+    <tbody>
+      <tr><td>Open cases by account</td><td>Chart + saved view</td><td>Group by Account, count &mdash; filter Status not Closed or Cancelled</td><td>Workload distribution across clients. Your most important CX health view &mdash; surfaces which accounts generate the most volume and whether it is trending up.</td></tr>
+      <tr><td>Cases by Account + Priority</td><td>Chart</td><td>Group by Account, sub-group by Priority</td><td>Which clients have the most urgent open issues. Five High cases at BPC is a different conversation than five Low ones.</td></tr>
+      <tr><td>Cases past Expected Resolution Date</td><td>Saved view</td><td>Filter: Expected Resolution Date before today AND Status not Resolved, Closed, or Cancelled</td><td>Daily SLA monitoring view. Core operational check alongside the stale cases view.</td></tr>
+      <tr><td>Average time to resolution by Priority</td><td>Chart</td><td>Group by Priority, calculate days between Created At and close date for Closed cases</td><td>How long cases are actually taking vs. working targets. Informs whether SLA targets are realistic once enough data exists.</td></tr>
+      <tr><td>Average time to resolution by Account</td><td>Chart</td><td>Group by Account, calculate days between Created At and close date</td><td>Which clients are getting faster resolution. Surfaces service consistency gaps across accounts.</td></tr>
+      <tr><td>Case volume trend by Account over time</td><td>Chart</td><td>Group by Account + Created At (month), count</td><td>Is a client&rsquo;s volume increasing month over month? A steady rise at one account is worth addressing before it becomes a relationship issue.</td></tr>
+      <tr><td>Root cause breakdown</td><td>Chart</td><td>Group by Root Cause Category, count &mdash; filter Status = Closed</td><td>Available once Root Cause Category has enough entries. Shows split between Platform Bug, Config Error, Training Gap. Direct input to product and training priorities.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Recommended Dashboard Setup</h3>
+  <p>Once a few reports are built, organize them into two dashboards &mdash; one for daily operations and one for monthly leadership reporting.</p>
+  <div class="bpg">
+    <div class="bpc"><h4><span class="ico">D</span>Daily Operations Dashboard</h4>Open cases by Status &middot; Escalated open cases &middot; Cases past Expected Resolution Date &middot; Cases not updated in 5+ days &middot; Awaiting Internal Response<br><br><em>Purpose: Tracey&rsquo;s morning check. Everything needed to triage, prioritize, and follow up in one view.</em></div>
+    <div class="bpc"><h4><span class="ico b">M</span>Monthly Reporting Dashboard</h4>Cases opened vs. resolved this month &middot; Cases by Type &middot; Open cases by Account &middot; Cancelled cases by reason &middot; Feature request log &middot; Root cause breakdown (once available)<br><br><em>Purpose: Monthly touchpoint with Alec and Jose. Volume, trends, and product signals in one shareable view.</em></div>
+  </div>
+
+  <div class="callout ca"><div class="ct">Export Note</div>Any saved view can be exported to CSV or Excel. Use this for ad hoc analysis, sharing data with Alec outside of Transform, or building charts manually when the platform&rsquo;s native charts do not support a specific view you need.</div>
+</div>
+
+
+<!-- APPENDIX -->
+<div class="section" id="appendix">
+  <div class="slabel">Appendix</div>
+  <h2 class="st">Future State</h2>
+  <p>The items below require platform capabilities — conditional logic, automated workflows, or structured data relationships — that do not yet exist in Transform. They are documented here for visibility and future prioritization. None of these are actionable until the platform supports them.</p>
+  <p>Per Jose's guidance: iterate on real experience first. Revisit this list quarterly as the platform matures.</p>
+
+  <h3>Conditional Field Logic</h3>
+  <p>These fields would conditionally appear or become required based on another field's value. Currently all fields in Transform display regardless of context.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Field</th><th>Trigger Condition</th><th>Behavior</th></tr></thead>
+    <tbody>
+      <tr><td>Cancellation Reason</td><td>Status = Cancelled</td><td>Field appears and becomes required only when the case is being cancelled. Hidden for all other statuses.</td></tr>
+      <tr><td>Steps to Reproduce</td><td>Type = Bug/Defect or Integration Issue</td><td>Field appears and becomes required for these case types only. Ensures Dev always receives reproduction steps.</td></tr>
+      <tr><td>Resolution Notes</td><td>Status changing to Resolved or Closed</td><td>Form blocks the status change until Resolution Notes is populated. Does not apply to Cancelled.</td></tr>
+      <tr><td>Escalation Date</td><td>Escalated checkbox = checked</td><td>Auto-populates with today's date when the Escalated checkbox is checked. Removes manual date entry requirement.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Automated Workflows</h3>
+  <p>These require workflow or automation engine capabilities to trigger actions based on field changes or time elapsed.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Automation</th><th>Trigger</th><th>Action</th></tr></thead>
+    <tbody>
+      <tr><td>SLA Breach auto-flag</td><td>Expected Resolution Date has passed AND Status is not Resolved, Closed, or Cancelled</td><td>SLA Breach checkbox is automatically checked. Currently requires manual daily review to catch.</td></tr>
+      <tr><td>Auto-routing Team/Queue</td><td>Case Type + Priority combination is set at triage</td><td>Team/Queue field auto-populates based on routing logic table (Section 3). Reduces manual routing steps and enforces consistency.</td></tr>
+      <tr><td>Stale case alert</td><td>Last Modified At is more than 5 business days ago AND Status is not Closed or Cancelled</td><td>Notifies Tracey automatically. Currently handled by a manual daily saved view review.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Structured Data &amp; Reporting Enhancements</h3>
+  <p>These require richer data infrastructure — linked records, master lists, or platform-level reporting capabilities.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Enhancement</th><th>What It Enables</th><th>Dependency</th></tr></thead>
+    <tbody>
+      <tr><td>Account / Company as structured dropdown</td><td>Linked to a client master list — consistent naming, account-level rollup reporting, relationship between cases and accounts</td><td>Requires a client master record or account registry in Transform</td></tr>
+      <tr><td>Root Cause Category as structured dropdown</td><td>Clean categorical data for product feedback reporting. Potentially aligned to Transform Segments once patterns emerge from free-form entries.</td><td>Requires 3–6 months of free-form data to identify the right category set</td></tr>
+      <tr><td>Tier values linked to pricing plans</td><td>Tier dropdown values defined and connected to Transform's pricing tiers — enables SLA differentiation by contract type</td><td>Requires pricing plan definition and company-wide SLA agreement with Alec</td></tr>
+      <tr><td>Formal SLA framework</td><td>Contracted SLA commitments by Tier, communicated externally to clients. Replaces current internal working targets.</td><td>Requires company-wide agreement — Alec to review NetSuite reference and align with leadership</td></tr>
+    </tbody>
+  </table></div>
 </div>
 
 
